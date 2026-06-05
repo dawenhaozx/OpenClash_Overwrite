@@ -8,7 +8,7 @@ proxy-providers:
     health-check:
       enable: true
       interval: 120
-      url: https://g.cn/generate_204
+      url: http://www.gstatic.com/generate_204
     override:
       skip-cert-verify: true
       udp: true
@@ -23,15 +23,17 @@ anchor:
   FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$'
   FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$'
   FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|🇭🇰|🇸🇬|🇺🇸|HK|SG|US|HKG|SIN|XSP|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))'
+  Filter☆: &Filter☆ '^(?!.*(☆))'
 
   # 策略组代理列表模板
   SelectAU: &SelectAU {type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连)).)*$"}
   SelectMS: &SelectMS {type: select, proxies: [香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连], use: [Sub-store]}
-  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连], use: [Sub-store]}
-  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连]}
-  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, 自动选择, 全球直连]}
-  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, 自动选择, 全球直连]}
+  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连], use: [Sub-store]}
+  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连]}
+  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连]}
+  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, ☆, 自动选择, 全球直连]}
   SelectOT: &SelectOT {type: select, proxies: [手动选择, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
+  Select☆: &Select☆ {type: select, proxies: [手动选择, ☆, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
 
   # 规则提供者锚点
   ip:     &ip     {type: http, interval: 86400, behavior: ipcidr,    format: mrs}
@@ -50,7 +52,7 @@ proxy-groups:
   - {name: 谷歌服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"}
   - {name: 微软服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"}
   - {name: 苹果服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"}
-  - {name: Emby,       <<: *SelectSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"}
+  - {name: Emby,       <<: *Select☆, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"}
   - {name: 国外媒体,   <<: *SelectSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
   - {name: 漏网之鱼,   <<: *SelectMH, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"}
 
@@ -59,6 +61,7 @@ proxy-groups:
   - {name: 美国节点,    <<: *BaseURL-test, filter: *FilterUS, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"}
   - {name: 新加坡节点,  <<: *BaseURL-test, filter: *FilterSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"}
   - {name: 其它节点,    <<: *BaseURL-test, filter: *FilterOT, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Taiwan_Province.png"}
+  - {name: ☆,         <<: *BaseURL-test, filter: *Filter☆, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
   - {name: 全球直连,    <<: *BaseDIRECT,  proxies: [DIRECT], icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/DIRECT.png"}
 
 # =========================================
@@ -76,7 +79,6 @@ rules:
   - RULE-SET,Custom_Proxy_IP,手动选择,no-resolve
 
   # ── 国内 / CDN 直连 ──
-  - RULE-SET,google-cn,全球直连
   - RULE-SET,category-games@cn,全球直连
   - RULE-SET,Steam_CDN_Domain,全球直连
   - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
@@ -132,7 +134,6 @@ rule-providers:
   Custom_Proxy_Domain:              {<<: *domain, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/Custom_Proxy_Domain.mrs"}
   Custom_Proxy_IP:                  {<<: *ip,     url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Custom_Proxy_IP.mrs"}
   # 国内 CDN / 游戏直连
-  google-cn:                        {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs"}
   category-games@cn:                {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs"}
   Steam_CDN_Domain:                 {<<: *domain, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Steam_CDN_Domain.mrs"}
   Steam_CDN_IP:                     {<<: *ip,     url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Steam_CDN_IP.mrs"}
