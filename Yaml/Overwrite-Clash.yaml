@@ -23,17 +23,17 @@ anchor:
   FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$'
   FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$'
   FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|🇭🇰|🇸🇬|🇺🇸|HK|SG|US|HKG|SIN|XSP|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))'
-  Filter☆: &Filter☆ '^(?=.*(?i)(☆|O)).*$'
+  FilterO: &FilterO '^(?=.*(?i)(O)).*$'
 
   # 策略组代理列表模板
   SelectAU: &SelectAU {type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连)).)*$"}
   SelectMS: &SelectMS {type: select, proxies: [香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连], use: [Sub-store]}
-  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连], use: [Sub-store]}
-  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连]}
-  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, ☆, 自动选择, 全球直连]}
-  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, ☆, 自动选择, 全球直连]}
+  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连], use: [Sub-store]}
+  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连]}
+  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连]}
+  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, O, 自动选择, 全球直连]}
   SelectOT: &SelectOT {type: select, proxies: [手动选择, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
-  Select☆: &Select☆ {type: select, proxies: [手动选择, ☆, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
+  SelectO: &SelectO {type: select, proxies: [手动选择, O, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
 
   # 规则提供者锚点
   ip:     &ip     {type: http, interval: 86400, behavior: ipcidr,    format: mrs}
@@ -52,7 +52,7 @@ proxy-groups:
   - {name: 谷歌服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"}
   - {name: 微软服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"}
   - {name: 苹果服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"}
-  - {name: Emby,       <<: *Select☆, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"}
+  - {name: Emby,       <<: *SelectO, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"}
   - {name: 国外媒体,   <<: *SelectSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
   - {name: 漏网之鱼,   <<: *SelectMH, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"}
 
@@ -61,7 +61,7 @@ proxy-groups:
   - {name: 美国节点,    <<: *BaseURL-test, filter: *FilterUS, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"}
   - {name: 新加坡节点,  <<: *BaseURL-test, filter: *FilterSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"}
   - {name: 其它节点,    <<: *BaseURL-test, filter: *FilterOT, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Taiwan_Province.png"}
-  - {name: ☆,         <<: *BaseURL-test, filter: *Filter☆, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
+  - {name: O,         <<: *BaseURL-test, filter: *FilterO, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
   - {name: 全球直连,    <<: *BaseDIRECT,  proxies: [DIRECT], icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/DIRECT.png"}
 
 # =========================================
