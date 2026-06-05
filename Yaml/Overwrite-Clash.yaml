@@ -68,9 +68,6 @@ proxy-groups:
 #                 规则配置
 # =========================================
 rules:
-  # ── 谷歌（域名 + IP 双覆盖）──
-  - RULE-SET,google,谷歌服务
-  - RULE-SET,google-ip,谷歌服务,no-resolve
   # ── 私有地址 & 自定义名单（最高优先级）──
   - RULE-SET,private,全球直连
   - RULE-SET,private_IP,全球直连,no-resolve
@@ -91,6 +88,10 @@ rules:
 
   # ── Steam ──
   - RULE-SET,steam,Steam
+
+  # ── 谷歌（域名 + IP 双覆盖）──
+  - RULE-SET,google,谷歌服务
+  - RULE-SET,google-ip,谷歌服务,no-resolve
 
   # ── 微软 ──
   - RULE-SET,microsoft,微软服务
@@ -176,4 +177,6 @@ dns:
   - RULE-SET,category-games@cn,real-ip
   - RULE-SET,Steam_CDN_Domain,real-ip
   - RULE-SET,category-game-platforms-download,real-ip
+  - RULE-SET,google,fake-ip
   - RULE-SET,cn,real-ip
+  - MATCH,fake-ip
