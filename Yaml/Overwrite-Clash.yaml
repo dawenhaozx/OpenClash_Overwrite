@@ -68,15 +68,14 @@ proxy-groups:
 #                 规则配置
 # =========================================
 rules:
+  # ── 谷歌（域名 + IP 双覆盖）──
+  - RULE-SET,google,谷歌服务
+  - RULE-SET,google-ip,谷歌服务,no-resolve
   # ── 私有地址 & 自定义名单（最高优先级）──
   - RULE-SET,private,全球直连
   - RULE-SET,private_IP,全球直连,no-resolve
   - RULE-SET,dawenhaozx_proxy,手动选择
   - RULE-SET,dawenhaozx_direct,全球直连
-  - RULE-SET,Custom_Direct_Domain,全球直连
-  - RULE-SET,Custom_Direct_IP,全球直连,no-resolve
-  - RULE-SET,Custom_Proxy_Domain,手动选择
-  - RULE-SET,Custom_Proxy_IP,手动选择,no-resolve
 
   # ── 国内 / CDN 直连 ──
   - RULE-SET,category-games@cn,全球直连
@@ -92,10 +91,6 @@ rules:
 
   # ── Steam ──
   - RULE-SET,steam,Steam
-
-  # ── 谷歌（域名 + IP 双覆盖）──
-  - RULE-SET,google,谷歌服务
-  - RULE-SET,google-ip,谷歌服务,no-resolve
 
   # ── 微软 ──
   - RULE-SET,microsoft,微软服务
@@ -127,11 +122,6 @@ rule-providers:
   # 私有
   private:                          {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   private_IP:                       {<<: *ip,     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"}
-  # 用户自定义直连/代理
-  Custom_Direct_Domain:             {<<: *domain, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/Custom_Direct_Domain.mrs"}
-  Custom_Direct_IP:                 {<<: *ip,     url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/Custom_Direct_IP.mrs"}
-  Custom_Proxy_Domain:              {<<: *domain, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/Custom_Proxy_Domain.mrs"}
-  Custom_Proxy_IP:                  {<<: *ip,     url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Custom_Proxy_IP.mrs"}
   # 国内 CDN / 游戏直连
   category-games@cn:                {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs"}
   Steam_CDN_Domain:                 {<<: *domain, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Steam_CDN_Domain.mrs"}
@@ -183,7 +173,6 @@ dns:
   - RULE-SET,fake_ip_filter,real-ip
   - RULE-SET,dawenhaozx_direct,real-ip
   - RULE-SET,connectivity-check,real-ip
-  - RULE-SET,Custom_Direct_Domain,real-ip
   - RULE-SET,category-games@cn,real-ip
   - RULE-SET,Steam_CDN_Domain,real-ip
   - RULE-SET,category-game-platforms-download,real-ip
