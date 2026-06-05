@@ -23,7 +23,7 @@ anchor:
   FilterSG: &FilterSG '^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$'
   FilterUS: &FilterUS '^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$'
   FilterOT: &FilterOT '^(?!.*(DIRECT|直接连接|美|港|坡|台|新|日|韩|🇭🇰|🇸🇬|🇺🇸|HK|SG|US|HKG|SIN|XSP|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD))'
-  Filter☆: &Filter☆ '^(?=.*(?i)(☆)).*$'
+  Filter☆: &Filter☆ '^(?=.*(?i)(☆|O)).*$'
 
   # 策略组代理列表模板
   SelectAU: &SelectAU {type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连)).)*$"}
