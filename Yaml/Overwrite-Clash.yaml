@@ -179,12 +179,12 @@ dns:
   - "[2409:8057:2000:6::8]:53"
   - "[2409:8057:2000:2::8]:53"
   fake-ip-filter:
-  - RULE-SET,private
-  - RULE-SET,fake_ip_filter
-  - RULE-SET,dawenhaozx_direct
-  - RULE-SET,connectivity-check
-  - RULE-SET,Custom_Direct_Domain
-  - RULE-SET,category-games@cn
-  - RULE-SET,Steam_CDN_Domain
-  - RULE-SET,category-game-platforms-download
-  - RULE-SET,cn
+  - RULE-SET,private,real-ip
+  - RULE-SET,fake_ip_filter,real-ip
+  - RULE-SET,dawenhaozx_direct,real-ip
+  - RULE-SET,connectivity-check,real-ip
+  - RULE-SET,Custom_Direct_Domain,real-ip
+  - RULE-SET,category-games@cn,real-ip
+  - RULE-SET,Steam_CDN_Domain,real-ip
+  - RULE-SET,category-game-platforms-download,real-ip
+  - RULE-SET,cn,real-ip
