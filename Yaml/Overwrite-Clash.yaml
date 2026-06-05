@@ -168,7 +168,7 @@ dns:
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
   respect-rules: false
-  fake-ip-filter-mode: blacklist
+  fake-ip-filter-mode: rule
   nameserver:
   - dhcp://"pppoe-wan"
   - 172.16.0.1
