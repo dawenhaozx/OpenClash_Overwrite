@@ -27,13 +27,13 @@ anchor:
 
   # 策略组代理列表模板
   SelectAU: &SelectAU {type: url-test, include-all: true, tolerance: 50, interval: 300, filter: "^((?!(直连)).)*$"}
-  SelectMS: &SelectMS {type: select, proxies: [香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连], use: [Sub-store]}
-  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连], use: [Sub-store]}
-  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连]}
-  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连]}
-  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, O, 自动选择, 全球直连]}
-  SelectOT: &SelectOT {type: select, proxies: [手动选择, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
-  SelectO: &SelectO {type: select, proxies: [手动选择, O, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连]}
+  SelectMS: &SelectMS {type: select, proxies: [香港节点, 美国节点, 新加坡节点, 其它节点, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectMH: &SelectMH {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectHK: &SelectHK {type: select, proxies: [手动选择, 香港节点, 美国节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectUS: &SelectUS {type: select, proxies: [手动选择, 美国节点, 香港节点, 新加坡节点, 其它节点, O, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectSG: &SelectSG {type: select, proxies: [手动选择, 新加坡节点, 香港节点, 美国节点, 其它节点, O, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectOT: &SelectOT {type: select, proxies: [手动选择, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连, REJECT], use: [Sub-store]}
+  SelectO:  &SelectO  {type: select, proxies: [手动选择, O, 其它节点, 香港节点, 美国节点, 新加坡节点, 自动选择, 全球直连, REJECT], use: [Sub-store]}
 
   # 规则提供者锚点
   ip:     &ip     {type: http, interval: 86400, behavior: ipcidr,    format: mrs}
@@ -47,7 +47,7 @@ proxy-groups:
   - {name: 手动选择,   <<: *SelectMS, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"}
   - {name: 自动选择,   <<: *SelectAU, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"}
   - {name: AI服务,     <<: *SelectUS, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/AI_bot.png"}
-  - {name: Sony,       <<: *SelectSG, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
+  - {name: Sony,       <<: *SelectO, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"}
   - {name: Steam,      <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"}
   - {name: 谷歌服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"}
   - {name: 微软服务,   <<: *SelectHK, icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"}
@@ -142,7 +142,7 @@ rule-providers:
   google-gemini:                    {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-gemini.mrs"}
   category-ai:                      {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"}
   # Sony
-  sony:                             {<<: *class,  url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"}
+  sony:                             {<<: *domain,  url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"}
   # Steam / 谷歌 / 微软 / 苹果
   steam:                            {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"}
   google:                           {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
@@ -157,3 +157,34 @@ rule-providers:
   # 国内直连
   cn:                               {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   cn-ip:                            {<<: *ip,     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
+  # fakeip
+  connectivity-check:               {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"}
+  fake_ip_filter:                   {<<: *class, url: "https://github.com/DustinWin/ShellCrash/blob/dev/public/fake_ip_filter.list"}
+
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  respect-rules: false
+  fake-ip-filter-mode: blacklist
+  nameserver:
+  - dhcp://"pppoe-wan"
+  - 172.16.0.1
+  - 192.168.50.1
+  - "[fe80::d2ef:c1ff:feea:dff7]:53"
+  - 120.196.165.24
+  - 211.136.192.6
+  - "[2409:8057:2000:6::8]:53"
+  - "[2409:8057:2000:2::8]:53"
+  fake-ip-filter:
+  - RULE-SET,private
+  - RULE-SET,fake_ip_filter
+  - RULE-SET,dawenhaozx_direct
+  - RULE-SET,connectivity-check
+  - RULE-SET,Custom_Direct_Domain
+  - RULE-SET,category-games@cn
+  - RULE-SET,Steam_CDN_Domain
+  - RULE-SET,category-game-platforms-download
+  - RULE-SET,cn
