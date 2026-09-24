@@ -35,18 +35,18 @@ anchor:
   FilterSG: &FilterSG
      filter: >-
       ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
-  # O
-  FilterO: &FilterO
+  # 日本
+  FilterJP: &FilterJP
      filter: >-
-      ^(?=.*(?i)(O)).*$
+      ^(?=.*(?i)(日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK)).*$
   # 美国
   FilterUS: &FilterUS
      filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
-  # Fallback
-  FilterF: &FilterF
+  # 台湾
+  FilterTW: &FilterTW
     filter: >-
-      ^(?=.*(?i)(B)).*$
+      ^(?=.*(?i)(台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH)).*$
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
   SelectAU: &SelectAU
@@ -62,9 +62,9 @@ anchor:
     proxies:
       - 香港节点
       - 美国节点
-      - O节点
+      - 日本节点
       - 新加坡节点
-      - F节点
+      - 台湾节点
       - 自动选择
       - 全球直连
 
@@ -74,8 +74,8 @@ anchor:
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - O节点
-      - F节点
+      - 日本节点
+      - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
@@ -88,8 +88,8 @@ anchor:
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - O节点
-      - F节点
+      - 日本节点
+      - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
@@ -100,8 +100,8 @@ anchor:
       - 美国节点
       - 香港节点
       - 新加坡节点
-      - O节点
-      - F节点
+      - 日本节点
+      - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
@@ -112,32 +112,32 @@ anchor:
       - 新加坡节点
       - 香港节点
       - 美国节点
-      - O节点
-      - F节点
+      - 日本节点
+      - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
 
-  SelectO: &SelectO
+  SelectJP: &SelectJP
     type: select
     proxies:
-      - O节点
+      - 日本节点
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - F节点
+      - 台湾节点
       - 手动选择
       - 自动选择
       - 全球直连
 
-  SelectF: &SelectF
+  SelectTW: &SelectTW
     type: select
     proxies:
-      - F节点
+      - 台湾节点
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - O节点
+      - 日本节点
       - 手动选择
       - 自动选择
       - 全球直连
@@ -231,16 +231,16 @@ proxy-groups:
     <<: [*BaseUT, *FilterUS]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
-  - name: O节点
-    <<: [*BaseUT, *FilterO]
+  - name: 日本节点
+    <<: [*BaseUT, *FilterJP]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
 
   - name: 新加坡节点
     <<: [*BaseUT, *FilterSG]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"
 
-  - name: F节点
-    <<: [*BaseUT, *FilterF]
+  - name: 台湾节点
+    <<: [*BaseUT, *FilterTW]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Taiwan_Province.png"
 
   - name: 全球直连
