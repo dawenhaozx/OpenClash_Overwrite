@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "http://www.apple.com/library/test/success.html"
+      url: "http://www.gstatic.com/generate_204"
       interval: 10
     override:
       skip-cert-verify: true
@@ -24,13 +24,13 @@ anchor:
     include-all: true
     tolerance: 20
     interval: 120
-    url: http://www.apple.com/library/test/success.html
+    url: http://www.gstatic.com/generate_204
 
   Fallback: &Fallback
     type: fallback
     include-all: true
     interval: 30
-    url: http://www.apple.com/library/test/success.html
+    url: http://www.gstatic.com/generate_204
 
   # 节点筛选正则
   # 香港
