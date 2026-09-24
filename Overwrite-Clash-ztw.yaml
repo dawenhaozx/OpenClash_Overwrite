@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "https://g.cn/generate_204"
+      url: "http://g.cn/generate_204"
       interval: 10
     override:
       skip-cert-verify: true
@@ -24,7 +24,7 @@ anchor:
     include-all: true
     tolerance: 20
     interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    url: http://cp.cloudflare.com/generate_204
 
   # 节点筛选正则
   # O
@@ -72,7 +72,7 @@ anchor:
       - O节点
       - 美国节点
     interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    url: http://cp.cloudflare.com/generate_204
 
   SelectA: &SelectA
     type: select
