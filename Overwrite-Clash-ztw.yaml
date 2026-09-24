@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "https://g.cn/generate_204"
+      url: "http://www.apple.com/library/test/success.html"
       interval: 10
     override:
       skip-cert-verify: true
@@ -24,13 +24,13 @@ anchor:
     include-all: true
     tolerance: 20
     interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.apple.com/library/test/success.html
 
   Fallback: &Fallback
     type: fallback
     include-all: true
     interval: 30
-    url: https://cp.cloudflare.com/generate_204
+    url: http://www.apple.com/library/test/success.html
 
   # 节点筛选正则
   # O
