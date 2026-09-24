@@ -44,10 +44,6 @@ anchor:
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
   SelectAU: &SelectAU
-    type: url-test
-    include-all: true
-    tolerance: 20
-    interval: 120
     filter: "^((?!(直连)).)*$"
 
   SelectMS: &SelectMS
@@ -106,7 +102,7 @@ proxy-groups:
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
 
   - name: 自动选择
-    <<: *SelectAU
+    <<: [*BaseUT, *SelectAU]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   - name: AI服务
