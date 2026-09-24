@@ -26,6 +26,12 @@ anchor:
     interval: 120
     url: https://cp.cloudflare.com/generate_204
 
+  Fallback: &Fallback
+    type: fallback
+    include-all: true
+    interval: 30
+    url: https://cp.cloudflare.com/generate_204
+
   # 节点筛选正则
   # 香港
   FilterHK: &FilterHK
@@ -43,10 +49,6 @@ anchor:
   FilterUS: &FilterUS
      filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
-  # Fallback
-  FilterF: &FilterF
-    filter: >-
-      ^(?=.*(?i)(B)).*$
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
   SelectAU: &SelectAU
@@ -64,81 +66,17 @@ anchor:
       - 美国节点
       - O节点
       - 新加坡节点
-      - F节点
       - 自动选择
       - 全球直连
 
-  SelectMH: &SelectMH
+  SelectA: &SelectA
     type: select
     proxies:
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
-      - O节点
-      - F节点
       - 手动选择
-      - 自动选择
-      - 全球直连
-    use:
-      - Sub-store
-
-  SelectHK: &SelectHK
-    type: select
-    proxies:
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
-      - O节点
-      - F节点
-      - 手动选择
-      - 自动选择
-      - 全球直连
-
-  SelectUS: &SelectUS
-    type: select
-    proxies:
-      - 美国节点
-      - 香港节点
-      - 新加坡节点
-      - O节点
-      - F节点
-      - 手动选择
-      - 自动选择
-      - 全球直连
-
-  SelectSG: &SelectSG
-    type: select
-    proxies:
-      - 新加坡节点
       - 香港节点
       - 美国节点
       - O节点
-      - F节点
-      - 手动选择
-      - 自动选择
-      - 全球直连
-
-  SelectO: &SelectO
-    type: select
-    proxies:
-      - O节点
-      - 香港节点
-      - 美国节点
       - 新加坡节点
-      - F节点
-      - 手动选择
-      - 自动选择
-      - 全球直连
-
-  SelectF: &SelectF
-    type: select
-    proxies:
-      - F节点
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
-      - O节点
-      - 手动选择
       - 自动选择
       - 全球直连
 
@@ -184,43 +122,43 @@ proxy-groups:
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   - name: AI服务
-    <<: *SelectUS
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/AI_bot.png"
 
   - name: Sony
-    <<: *SelectUS
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/TikTok.png"
 
   - name: Emby
-    <<: *SelectSG
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"
 
   - name: 国外媒体
-    <<: *SelectSG
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
   - name: 谷歌服务
-    <<: *SelectHK
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
 
   - name: 苹果服务
-    <<: *SelectHK
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"
 
   - name: 微软服务
-    <<: *SelectHK
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
 
   - name: 游戏平台
-    <<: *SelectHK
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Game.png"
 
   - name: Steam
-    <<: *SelectHK
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
 
   - name: 漏网之鱼
-    <<: *SelectMH
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
 
   - name: 香港节点
@@ -238,10 +176,6 @@ proxy-groups:
   - name: 新加坡节点
     <<: [*BaseUT, *FilterSG]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"
-
-  - name: F节点
-    <<: [*BaseUT, *FilterF]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Taiwan_Province.png"
 
   - name: 全球直连
     type: select

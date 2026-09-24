@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "http://g.cn/generate_204"
+      url: "https://g.cn/generate_204"
       interval: 10
     override:
       skip-cert-verify: true
@@ -24,13 +24,19 @@ anchor:
     include-all: true
     tolerance: 20
     interval: 120
-    url: http://cp.cloudflare.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
+
+  Fallback: &Fallback
+    type: fallback
+    include-all: true
+    interval: 30
+    url: https://cp.cloudflare.com/generate_204
 
   # 节点筛选正则
   # O
   FilterO: &FilterO
      filter: >-
-      ^(?=.*(?i)(AKKO)).*$
+      ^(?=.*(?i)(O)).*$
   # 美国
   FilterUS: &FilterUS
      filter: >-
@@ -48,39 +54,17 @@ anchor:
     type: select
     include-all: true
     proxies:
-      - 自动回落
-      - O节点
       - 美国节点
+      - O节点
       - 自动选择
       - 全球直连
-
-  SelectMH: &SelectMH
-    type: select
-    proxies:
-      - 自动回落
-      - O节点
-      - 美国节点
-      - 手动选择
-      - 自动选择
-      - 全球直连
-    use:
-      - Sub-store
-
-  FallbackUS: &FallbackUS
-    type: fallback
-    proxies:
-      - O节点
-      - 美国节点
-    interval: 120
-    url: http://cp.cloudflare.com/generate_204
 
   SelectA: &SelectA
     type: select
     proxies:
-      - 自动回落
       - 手动选择
-      - O节点
       - 美国节点
+      - O节点
       - 自动选择
       - 全球直连
 
@@ -162,20 +146,16 @@ proxy-groups:
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
 
   - name: 漏网之鱼
-    <<: *SelectMH
+    <<: *SelectA
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
 
   - name: 美国节点
-    <<: [*BaseUT, *FilterUS]
+    <<: [*Fallback, *FilterUS]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
   - name: O节点
     <<: [*BaseUT, *FilterO]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
-
-  - name: 自动回落
-    <<: *FallbackUS
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
 
   - name: 全球直连
     type: select
