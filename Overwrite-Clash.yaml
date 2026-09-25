@@ -183,9 +183,9 @@ proxy-groups:
     <<: *SelectO
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
-  # - name: 谷歌服务
-  #   <<: *SelectO
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
+  - name: 谷歌服务
+    <<: *SelectO
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
 
   # - name: 苹果服务
   #   <<: *SelectO
