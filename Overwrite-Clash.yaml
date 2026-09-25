@@ -7,10 +7,6 @@ anchor:
     type: http
     interval: 3600
     proxy: DIRECT
-    health-check:
-      enable: true
-      url: "https://www.g.cn/generate_204"
-      interval: 30
     override:
       skip-cert-verify: true
       udp: true
@@ -23,8 +19,11 @@ anchor:
     type: url-test
     include-all: true
     tolerance: 20
-    interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    lazy: true
+    timeout: 3000
+    expected-status: 204
+    url: "https://cp.cloudflare.com/generate_204"
 
   # Fallback: &Fallback
   #   type: fallback
@@ -44,7 +43,7 @@ anchor:
   # O
   FilterO: &FilterO
      filter: >-
-      ^(?=.*(?i)(O)).*$
+      ^(?=.*(?i)(^|[^A-Za-z0-9])O([^A-Za-z0-9]|$)).*$
   # 美国
   FilterUS: &FilterUS
      filter: >-
@@ -55,7 +54,11 @@ anchor:
     type: url-test
     include-all: true
     tolerance: 20
-    interval: 120
+    interval: 300
+    lazy: true
+    timeout: 3000
+    expected-status: 204
+    url: "https://cp.cloudflare.com/generate_204"
     filter: "^((?!(直连)).)*$"
 
   SelectMS: &SelectMS
