@@ -9,10 +9,15 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "https://g.cn/generate_204"
-      interval: 30
+      tolerance: 20
+      interval: 300
+      lazy: true
+      timeout: 3000
+      expected-status: 204
+      url: "https://cp.cloudflare.com/generate_204"
     override:
-      skip-cert-verify: true
+      tfo: true
+      mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
     filter: >-
@@ -84,6 +89,7 @@ anchor:
       - 韩国节点
       - 新加坡节点
       - 全球直连
+      - REJECT
     use:
       - Sub-store
 
