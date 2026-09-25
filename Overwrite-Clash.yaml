@@ -9,8 +9,8 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "http://www.gstatic.com/generate_204"
-      interval: 10
+      url: "https://www.g.cn/generate_204"
+      interval: 30
     override:
       skip-cert-verify: true
       udp: true
@@ -24,7 +24,7 @@ anchor:
     include-all: true
     tolerance: 20
     interval: 120
-    url: http://www.gstatic.com/generate_204
+    url: https://cp.cloudflare.com/generate_204
 
   # Fallback: &Fallback
   #   type: fallback
@@ -125,6 +125,7 @@ anchor:
       - 新加坡节点
       - 自动选择
       - 全球直连
+      - REJECT
 
 # 规则提供者模板
   ip: &ip
