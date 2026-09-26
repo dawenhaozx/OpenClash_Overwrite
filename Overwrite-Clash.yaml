@@ -16,8 +16,6 @@ anchor:
       expected-status: 204
       url: "https://cp.cloudflare.com/generate_204"
     override:
-      skip-cert-verify: true
-      tfo: true
       mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
