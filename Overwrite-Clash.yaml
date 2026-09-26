@@ -12,10 +12,11 @@ anchor:
       tolerance: 20
       interval: 300
       lazy: true
-      timeout: 3000
+      timeout: 5000
       expected-status: 204
       url: "https://cp.cloudflare.com/generate_204"
     override:
+      skip-cert-verify: true
       tfo: true
       mptcp: true
       udp: true
