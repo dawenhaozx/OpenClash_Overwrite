@@ -236,7 +236,6 @@ proxy-groups:
 rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
   - SRC-IP-CIDR,192.168.50.239/32,DIRECT
-  - SRC-IP-SUFFIX,::fe25:37f7,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_IP,全球直连,no-resolve
   - RULE-SET,dawenhaozx_proxy,手动选择
