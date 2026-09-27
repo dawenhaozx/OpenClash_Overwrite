@@ -16,6 +16,7 @@ anchor:
       expected-status: 204
       url: "https://cp.cloudflare.com/generate_204"
     override:
+      tfo: true
       mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
@@ -193,13 +194,13 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
 
-  # - name: 苹果服务
-  #   <<: *SelectMH
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"
+  - name: 苹果服务
+    <<: *SelectMH
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"
 
-  # - name: 微软服务
-  #   <<: *SelectMH
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
+  - name: 微软服务
+    <<: *SelectMH
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
 
   - name: 游戏平台
     <<: *SelectMH
@@ -263,16 +264,16 @@ rules:
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,谷歌服务
   - RULE-SET,google-ip,谷歌服务,no-resolve
-  # - RULE-SET,apple,苹果服务
-  # - RULE-SET,microsoft,微软服务
+  - RULE-SET,apple,苹果服务
+  - RULE-SET,microsoft,微软服务
 
   # ── Emby ──
   - RULE-SET,category-emby,Emby
   - RULE-SET,dawenhaozx_emby,Emby
 
   # ── 国外媒体 ──
-  - RULE-SET,category-entertainment,国外媒体
   - RULE-SET,category-games,游戏平台
+  - RULE-SET,category-entertainment,国外媒体
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
