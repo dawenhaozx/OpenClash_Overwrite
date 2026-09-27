@@ -32,25 +32,28 @@ anchor:
     expected-status: 204
     url: "https://cp.cloudflare.com/generate_204"
 
-  # Fallback: &Fallback
-  #   type: fallback
-  #   include-all: true
-  #   interval: 30
-  #   url: https://cp.cloudflare.com/generate_204
+  Fallback: &Fallback
+    type: fallback
+    include-all: true
+    tolerance: 30
+    interval: 60
+    lazy: true
+    timeout: 3000
+    url: https://cp.cloudflare.com/generate_204
 
   # 节点筛选正则
-  # 香港
-  FilterHK: &FilterHK
-     filter: >-
-      ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
-  # 新加坡
-  FilterSG: &FilterSG
-     filter: >-
-      ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
-  # 韩国
-  FilterKR: &FilterKR
-     filter: >-
-      ^(?=.*(?i)(韩|🇰🇷|KR|KOR|Korea|韩国|首尔|Seoul|SEL|ICN)).*$
+  # # 香港
+  # FilterHK: &FilterHK
+  #    filter: >-
+  #     ^(?=.*(?i)(港|🇭🇰|HK|Hong|HKG)).*$
+  # # 新加坡
+  # FilterSG: &FilterSG
+  #    filter: >-
+  #     ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
+  # # 韩国
+  # FilterKR: &FilterKR
+  #    filter: >-
+  #     ^(?=.*(?i)(韩|🇰🇷|KR|KOR|Korea|韩国|首尔|Seoul|SEL|ICN)).*$
   # 美国
   FilterUS: &FilterUS
      filter: >-
@@ -72,64 +75,64 @@ anchor:
     type: select
     include-all: true
     proxies:
-      - 香港节点
+      # - 香港节点
       - 美国节点
-      - 韩国节点
-      - 新加坡节点
+      # - 韩国节点
+      # - 新加坡节点
       - 全球直连
 
   SelectMH: &SelectMH
     type: select
     proxies:
       - 手动选择
-      - 香港节点
       - 美国节点
-      - 韩国节点
-      - 新加坡节点
+      # - 香港节点
+      # - 韩国节点
+      # - 新加坡节点
       - 全球直连
       - REJECT
     use:
       - Sub-store
 
-  SelectHK: &SelectHK
-    type: select
-    proxies:
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
-      - 韩国节点
-      - 手动选择
-      - 全球直连
+  # SelectHK: &SelectHK
+  #   type: select
+  #   proxies:
+  #     - 香港节点
+  #     - 美国节点
+  #     - 新加坡节点
+  #     - 韩国节点
+  #     - 手动选择
+  #     - 全球直连
 
   SelectUS: &SelectUS
     type: select
     proxies:
       - 美国节点
-      - 香港节点
-      - 新加坡节点
-      - 韩国节点
+      # - 香港节点
+      # - 新加坡节点
+      # - 韩国节点
       - 手动选择
       - 全球直连
 
-  SelectSG: &SelectSG
-    type: select
-    proxies:
-      - 新加坡节点
-      - 香港节点
-      - 美国节点
-      - 韩国节点
-      - 手动选择
-      - 全球直连
+  # SelectSG: &SelectSG
+  #   type: select
+  #   proxies:
+  #     - 新加坡节点
+  #     - 香港节点
+  #     - 美国节点
+  #     - 韩国节点
+  #     - 手动选择
+  #     - 全球直连
 
-  SelectKR: &SelectKR
-    type: select
-    proxies:
-      - 韩国节点
-      - 香港节点
-      - 美国节点
-      - 新加坡节点
-      - 手动选择
-      - 全球直连
+  # SelectKR: &SelectKR
+  #   type: select
+  #   proxies:
+  #     - 韩国节点
+  #     - 香港节点
+  #     - 美国节点
+  #     - 新加坡节点
+  #     - 手动选择
+  #     - 全球直连
 
 # 规则提供者模板
   ip: &ip
@@ -196,21 +199,21 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
 
-  - name: 香港节点
-    <<: [*BaseUT, *FilterHK]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
+  # - name: 香港节点
+  #   <<: [*BaseUT, *FilterHK]
+  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
 
   - name: 美国节点
-    <<: [*BaseUT, *FilterUS]
+    <<: [*Fallback, *FilterUS]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
-  - name: 韩国节点
-    <<: [*BaseUT, *FilterKR]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
+  # - name: 韩国节点
+  #   <<: [*BaseUT, *FilterKR]
+  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
 
-  - name: 新加坡节点
-    <<: [*BaseUT, *FilterSG]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"
+  # - name: 新加坡节点
+  #   <<: [*BaseUT, *FilterSG]
+  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Singapore.png"
 
   - name: 全球直连
     type: select
