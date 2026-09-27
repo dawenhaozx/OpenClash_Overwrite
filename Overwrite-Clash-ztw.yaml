@@ -9,10 +9,14 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      url: "https://g.cn/generate_204"
-      interval: 30
+      tolerance: 30
+      interval: 300
+      lazy: true
+      timeout: 5000
+      expected-status: 204
+      url: "https://cp.cloudflare.com/generate_204"
     override:
-      skip-cert-verify: true
+      mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
     filter: >-
@@ -22,15 +26,18 @@ anchor:
   BaseUT: &BaseUT
     type: url-test
     include-all: true
-    tolerance: 20
-    interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    tolerance: 30
+    interval: 60
+    lazy: true
+    timeout: 3000
+    expected-status: 204
+    url: "https://cp.cloudflare.com/generate_204"
 
-  Fallback: &Fallback
-    type: fallback
-    include-all: true
-    interval: 30
-    url: https://cp.cloudflare.com/generate_204
+  # Fallback: &Fallback
+  #   type: fallback
+  #   include-all: true
+  #   interval: 30
+  #   url: https://cp.cloudflare.com/generate_204
 
   # 节点筛选正则
   # 香港
@@ -41,33 +48,35 @@ anchor:
   FilterSG: &FilterSG
      filter: >-
       ^(?=.*(?i)(坡|🇸🇬|SG|Sing|SIN|XSP)).*$
-  # O
-  FilterO: &FilterO
+  # 韩国
+  FilterKR: &FilterKR
      filter: >-
-      ^(?=.*(?i)(O)).*$
+      ^(?=.*(?i)(韩|🇰🇷|KR|KOR|Korea|韩国|首尔|Seoul|SEL|ICN)).*$
   # 美国
   FilterUS: &FilterUS
      filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-  SelectAU: &SelectAU
-    type: url-test
-    include-all: true
-    tolerance: 20
-    interval: 120
-    filter: "^((?!(直连)).)*$"
+  # SelectAU: &SelectAU
+  #   type: url-test
+  #   include-all: true
+  #   tolerance: 20
+  #   interval: 300
+  #   lazy: true
+  #   timeout: 3000
+  #   expected-status: 204
+  #   url: "https://cp.cloudflare.com/generate_204"
+  #   filter: "^((?!(直连)).)*$"
 
   SelectMS: &SelectMS
     type: select
     include-all: true
     proxies:
-      - 自动回落
       - 香港节点
       - 美国节点
-      - O节点
+      - 韩国节点
       - 新加坡节点
-      - 自动选择
       - 全球直连
 
   SelectMH: &SelectMH
@@ -76,10 +85,10 @@ anchor:
       - 手动选择
       - 香港节点
       - 美国节点
-      - O节点
+      - 韩国节点
       - 新加坡节点
-      - 自动选择
       - 全球直连
+      - REJECT
     use:
       - Sub-store
 
@@ -89,9 +98,8 @@ anchor:
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - O节点
+      - 韩国节点
       - 手动选择
-      - 自动选择
       - 全球直连
 
   SelectUS: &SelectUS
@@ -100,9 +108,8 @@ anchor:
       - 美国节点
       - 香港节点
       - 新加坡节点
-      - O节点
+      - 韩国节点
       - 手动选择
-      - 自动选择
       - 全球直连
 
   SelectSG: &SelectSG
@@ -111,22 +118,19 @@ anchor:
       - 新加坡节点
       - 香港节点
       - 美国节点
-      - O节点
+      - 韩国节点
       - 手动选择
-      - 自动选择
       - 全球直连
 
-  SelectO: &SelectO
+  SelectKR: &SelectKR
     type: select
     proxies:
-      - 手动选择
-      - O节点
+      - 韩国节点
       - 香港节点
       - 美国节点
       - 新加坡节点
-      - 自动选择
+      - 手动选择
       - 全球直连
-      - REJECT
 
 # 规则提供者模板
   ip: &ip
@@ -165,53 +169,33 @@ proxy-groups:
     <<: *SelectMS
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
 
-  - name: 自动选择
-    <<: *SelectAU
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
+  # - name: 自动选择
+  #   <<: *SelectAU
+  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   - name: AI服务
-    <<: *SelectO
+    <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/AI_bot.png"
 
-  - name: Sony
-    <<: *SelectO
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/TikTok.png"
-
   - name: Emby
-    <<: *SelectO
+    <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Emby.png"
 
   - name: 国外媒体
-    <<: *SelectO
+    <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
   - name: 谷歌服务
-    <<: *SelectO
+    <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
 
-  # - name: 苹果服务
-  #   <<: *SelectO
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Apple_black.png"
-
-  # - name: 微软服务
-  #   <<: *SelectO
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
-
-  - name: 游戏平台
-    <<: *SelectO
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Game.png"
-
   - name: Steam
-    <<: *SelectO
+    <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
 
   - name: 漏网之鱼
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
-
-  - name: 自动回落
-    <<: [*Fallback, *FilterUS]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
   - name: 香港节点
     <<: [*BaseUT, *FilterHK]
@@ -221,8 +205,8 @@ proxy-groups:
     <<: [*BaseUT, *FilterUS]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
-  - name: O节点
-    <<: [*BaseUT, *FilterO]
+  - name: 韩国节点
+    <<: [*BaseUT, *FilterKR]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Japan.png"
 
   - name: 新加坡节点
@@ -254,17 +238,12 @@ rules:
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
 
-  # ── Sony ──
-  - RULE-SET,sony,Sony
-
   # ── Steam ──
   - RULE-SET,steam,Steam
 
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,谷歌服务
   - RULE-SET,google-ip,谷歌服务,no-resolve
-  # - RULE-SET,apple,苹果服务
-  # - RULE-SET,microsoft,微软服务
 
   # ── Emby ──
   - RULE-SET,category-emby,Emby
@@ -272,7 +251,6 @@ rules:
 
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
-  - RULE-SET,category-games,游戏平台
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
@@ -330,27 +308,11 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
 
-  # Sony
-  sony:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
-
   # Steam / 谷歌 / 微软 / 苹果
-  category-games:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs"
 
   steam:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
-
-  # apple:
-  #   <<: *domain
-  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
-
-  # microsoft:
-  #   <<: *domain
-  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
 
   google:
     <<: *domain
@@ -383,7 +345,7 @@ rule-providers:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
 
-  # fakeip
+  #fakeip
   connectivity-check:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"

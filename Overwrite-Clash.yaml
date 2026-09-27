@@ -201,10 +201,6 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
 
-  - name: 游戏平台
-    <<: *SelectMH
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Game.png"
-
   - name: Steam
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
@@ -271,7 +267,6 @@ rules:
   - RULE-SET,dawenhaozx_emby,Emby
 
   # ── 国外媒体 ──
-  - RULE-SET,category-games,游戏平台
   - RULE-SET,category-entertainment,国外媒体
 
   # ── 国内直连──
@@ -336,9 +331,6 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
 
   # Steam / 谷歌 / 微软 / 苹果
-  category-games:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs"
 
   steam:
     <<: *domain
