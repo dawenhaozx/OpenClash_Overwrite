@@ -145,12 +145,6 @@ anchor:
     behavior: domain
     format: mrs
 
-  domaintext: &domaintext
-    type: http
-    interval: 86400
-    behavior: domain
-    format: text
-
   class: &class
     type: http
     interval: 86400
@@ -388,8 +382,8 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
 
   fake_ip_filter:
-    <<: *domaintext
-    url: "https://raw.githubusercontent.com/DustinWin/ShellCrash/refs/heads/dev/public/fake_ip_filter.list"
+    <<: *class
+    url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
 
 dns:
   enable: true
