@@ -604,5 +604,4 @@ dns:
   
   - RULE-SET,cn,real-ip
   - MATCH,fake-ip
-nameserver-policy:
-  '*.ntp.org.cn': '8.8.8.8'
+  
