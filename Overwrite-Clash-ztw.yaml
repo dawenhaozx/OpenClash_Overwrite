@@ -54,10 +54,13 @@ anchor:
   # FilterKR: &FilterKR
   #    filter: >-
   #     ^(?=.*(?i)(韩|🇰🇷|KR|KOR|Korea|韩国|首尔|Seoul|SEL|ICN)).*$
-  # 美国
-  FilterUS: &FilterUS
-     filter: >-
-      ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
+  # # 美国
+  # FilterUS: &FilterUS
+  #    filter: >-
+  #     ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
+  # 回落
+  FilterFB: &FilterFB
+     filter: "^((?!(直连)).)*$"
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
   # SelectAU: &SelectAU
@@ -75,8 +78,9 @@ anchor:
     type: select
     include-all: true
     proxies:
+      - 自动回落
       # - 香港节点
-      - 美国节点
+      # - 美国节点
       # - 韩国节点
       # - 新加坡节点
       - 全球直连
@@ -85,7 +89,8 @@ anchor:
     type: select
     proxies:
       - 手动选择
-      - 美国节点
+      - 自动回落
+      # - 美国节点
       # - 香港节点
       # - 韩国节点
       # - 新加坡节点
@@ -107,7 +112,8 @@ anchor:
   SelectUS: &SelectUS
     type: select
     proxies:
-      - 美国节点
+      - 自动回落
+      # - 美国节点
       # - 香港节点
       # - 新加坡节点
       # - 韩国节点
@@ -203,8 +209,8 @@ proxy-groups:
   #   <<: [*BaseUT, *FilterHK]
   #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
 
-  - name: 美国节点
-    <<: [*Fallback, *FilterUS]
+  - name: 自动回落
+    <<: [*Fallback, *FilterFB]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
 
   # - name: 韩国节点
