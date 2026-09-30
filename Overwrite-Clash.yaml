@@ -235,6 +235,8 @@ proxy-groups:
 # =========================================
 rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
+  - SRC-IP-CIDR,192.168.50.140/32,DIRECT
+  - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_IP,全球直连,no-resolve
@@ -410,7 +412,7 @@ dns:
   - RULE-SET,category-games@cn,real-ip
   - RULE-SET,Steam_CDN_Domain,real-ip
   - RULE-SET,category-game-platforms-download,real-ip
-  - RULE-SET,google,fake-ip
+  # - RULE-SET,google,fake-ip
   # LAN
   - DOMAIN-SUFFIX,lan,real-ip
   - DOMAIN-SUFFIX,localdomain,real-ip
@@ -602,6 +604,5 @@ dns:
   # WiFi Calling
   - DOMAIN-SUFFIX,pub.3gppnetwork.org,real-ip
   
-  - RULE-SET,cn,real-ip
+  # - RULE-SET,cn,real-ip
   - MATCH,fake-ip
-  
