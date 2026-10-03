@@ -316,11 +316,24 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
 
+  # Sony
+  sony:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
+
   # Steam / 谷歌 / 微软 / 苹果
 
   steam:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+
+  apple:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+
+  microsoft:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
 
   google:
     <<: *domain
@@ -358,9 +371,13 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
 
+  fake_ip_filter:
+    <<: *class
+    url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
+
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
@@ -369,7 +386,7 @@ dns:
   nameserver:
   - dhcp://"pppoe-wan"
   - 172.16.0.1
-  - 192.168.30.1
+  - 192.168.50.1
   - "[fe80::d2ef:c1ff:feea:dff7]:53"
   - 120.196.165.24
   - 211.136.192.6
@@ -378,201 +395,11 @@ dns:
   fake-ip-filter:
   - RULE-SET,private,real-ip
   - RULE-SET,connectivity-check,real-ip
-  - RULE-SET,dawenhaozx_direct,real-ip
+  - RULE-SET,fake_ip_filter,real-ip
+  # - RULE-SET,dawenhaozx_direct,real-ip
   - RULE-SET,category-games@cn,real-ip
   - RULE-SET,Steam_CDN_Domain,real-ip
   - RULE-SET,category-game-platforms-download,real-ip
   - RULE-SET,google,fake-ip
-  # LAN
-  - DOMAIN-SUFFIX,lan,real-ip
-  - DOMAIN-SUFFIX,localdomain,real-ip
-  - DOMAIN-SUFFIX,example,real-ip
-  - DOMAIN-SUFFIX,invalid,real-ip
-  - DOMAIN-SUFFIX,localhost,real-ip
-  - DOMAIN-SUFFIX,test,real-ip
-  - DOMAIN-SUFFIX,local,real-ip
-  - DOMAIN-SUFFIX,home.arpa,real-ip
-  - DOMAIN-SUFFIX,direct,real-ip
-  - DOMAIN,cable.auth.com,real-ip
-  - DOMAIN,network-test.debian.org,real-ip
-  - DOMAIN,detectportal.firefox.com,real-ip
-  - DOMAIN,resolver1.opendns.com,real-ip
-  - DOMAIN,global.turn.twilio.com,real-ip
-  - DOMAIN,global.stun.twilio.com,real-ip
-  - DOMAIN,app.yinxiang.com,real-ip
-  - DOMAIN,injections.adguard.org,real-ip
-  - DOMAIN-REGEX,^localhost\.[^.]+\.weixin\.qq\.com$,real-ip
-  - DOMAIN-SUFFIX,blzstatic.cn,real-ip
-  - DOMAIN-SUFFIX,cmpassport.com,real-ip
-  - DOMAIN,id6.me,real-ip
-  - DOMAIN,open.e.189.cn,real-ip
-  - DOMAIN,opencloud.wostore.cn,real-ip
-  - DOMAIN,id.mail.wo.cn,real-ip
-  - DOMAIN,mdn.open.wo.cn,real-ip
-  - DOMAIN,hmrz.wo.cn,real-ip
-  - DOMAIN,nishub1.10010.com,real-ip
-  - DOMAIN,enrichgw.10010.com,real-ip
-  - DOMAIN-SUFFIX,wosms.cn,real-ip
-  - DOMAIN-SUFFIX,jegotrip.com.cn,real-ip
-  - DOMAIN-SUFFIX,icitymobile.mobi,real-ip
-  - DOMAIN-SUFFIX,pingan.com.cn,real-ip
-  - DOMAIN-SUFFIX,cmbchina.com,real-ip
-  - DOMAIN-SUFFIX,10099.com.cn,real-ip
-  - DOMAIN-SUFFIX,microdone.cn,real-ip
-  - DOMAIN-REGEX,^(?:PDC|DC|GC)\._msDCS\.[^.]+\.[^.]+$,real-ip
-
-  # NTP
-  - DOMAIN-REGEX,^time\.[^.]+\.com$,real-ip
-  - DOMAIN-REGEX,^time\.[^.]+\.gov$,real-ip
-  - DOMAIN-REGEX,^time\.[^.]+\.edu\.cn$,real-ip
-  - DOMAIN-REGEX,^time\.[^.]+\.apple\.com$,real-ip
-  - DOMAIN,time-ios.apple.com,real-ip
-  - DOMAIN-REGEX,^time[1-7]\.[^.]+\.com$,real-ip
-  - DOMAIN-REGEX,^ntp[1-7]?\.[^.]+\.com$,real-ip
-  - DOMAIN-SUFFIX,time.edu.cn,real-ip
-  - DOMAIN-SUFFIX,ntp.org.cn,real-ip
-  - DOMAIN-SUFFIX,pool.ntp.org,real-ip
-  - DOMAIN,time1.cloud.tencent.com,real-ip
-
-  # 网易云音乐
-  - DOMAIN-SUFFIX,music.163.com,real-ip
-  - DOMAIN-SUFFIX,126.net,real-ip
-
-  # 百度音乐
-  - DOMAIN,musicapi.taihe.com,real-ip
-  - DOMAIN,music.taihe.com,real-ip
-
-  # 酷狗音乐
-  - DOMAIN,songsearch.kugou.com,real-ip
-  - DOMAIN,trackercdn.kugou.com,real-ip
-
-  # 酷我音乐
-  - DOMAIN-SUFFIX,kuwo.cn,real-ip
-
-  # JOOX音乐
-  - DOMAIN,api-jooxtt.sanook.com,real-ip
-  - DOMAIN,api.joox.com,real-ip
-  - DOMAIN-SUFFIX,joox.com,real-ip
-
-  # QQ音乐
-  - DOMAIN-SUFFIX,y.qq.com,real-ip
-  - DOMAIN,streamoc.music.tc.qq.com,real-ip
-  - DOMAIN,mobileoc.music.tc.qq.com,real-ip
-  - DOMAIN,isure.stream.qqmusic.qq.com,real-ip
-  - DOMAIN,dl.stream.qqmusic.qq.com,real-ip
-  - DOMAIN,aqqmusic.tc.qq.com,real-ip
-  - DOMAIN,amobile.music.tc.qq.com,real-ip
-
-  # 虾米音乐
-  - DOMAIN-SUFFIX,xiami.com,real-ip
-
-  # 咪咕音乐
-  - DOMAIN-SUFFIX,music.migu.cn,real-ip
-
-  # Windows 本地连接检测
-  - DOMAIN-SUFFIX,msftconnecttest.com,real-ip
-  - DOMAIN-SUFFIX,msftncsi.com,real-ip
-
-  # QQ登录
-  - DOMAIN,localhost.ptlogin2.qq.com,real-ip
-  - DOMAIN,localhost.sec.qq.com,real-ip
-  - DOMAIN-SUFFIX,qq.com,real-ip
-  - DOMAIN-SUFFIX,tencent.com,real-ip
-
-  # Game
-  # Nintendo Switch
-  - DOMAIN-SUFFIX,srv.nintendo.net,real-ip
-  - DOMAIN-REGEX,^[^.]+\.n\.n\.srv\.nintendo\.net$,real-ip
-  - DOMAIN-SUFFIX,cdn.nintendo.net,real-ip
-
-  # Sony PlayStation
-  - DOMAIN-SUFFIX,stun.playstation.net,real-ip
-
-  # Microsoft Xbox
-  - DOMAIN-REGEX,^xbox\.[^.]+\.[^.]+\.microsoft\.com$,real-ip
-  - DOMAIN-SUFFIX,xboxlive.com,real-ip
-  - DOMAIN-REGEX,^xbox\.[^.]+\.microsoft\.com$,real-ip
-  - DOMAIN,xnotify.xboxlive.com,real-ip
-
-  # Wotgame
-  - DOMAIN-SUFFIX,battle.net,real-ip
-  - DOMAIN-SUFFIX,battlenet.com.cn,real-ip
-  - DOMAIN-SUFFIX,wotgame.cn,real-ip
-  - DOMAIN-SUFFIX,wggames.cn,real-ip
-  - DOMAIN-SUFFIX,wowsgame.cn,real-ip
-  - DOMAIN-SUFFIX,wargaming.net,real-ip
-
-  # Golang
-  - DOMAIN,proxy.golang.org,real-ip
-
-  # STUN
-  - DOMAIN-REGEX,^(?:[^.]+\.)*stun(?:\.[^.]+){2,5}$,real-ip
-
-  # Linksys Router
-  - DOMAIN,heartbeat.belkin.com,real-ip
-  - DOMAIN-SUFFIX,linksys.com,real-ip
-  - DOMAIN-SUFFIX,linksyssmartwifi.com,real-ip
-
-  # ASUS Router
-  - DOMAIN-SUFFIX,router.asus.com,real-ip
-
-  # Apple Software Update Service
-  - DOMAIN,mesu.apple.com,real-ip
-  - DOMAIN,swscan.apple.com,real-ip
-  - DOMAIN,swquery.apple.com,real-ip
-  - DOMAIN,swdownload.apple.com,real-ip
-  - DOMAIN,swcdn.apple.com,real-ip
-  - DOMAIN,swdist.apple.com,real-ip
-
-  # Google
-  - DOMAIN,lens.l.google.com,real-ip
-  - DOMAIN,stun.l.google.com,real-ip
-  - DOMAIN,na.b.g-tun.com,real-ip
-
-  # Netflix
-  - DOMAIN-SUFFIX,nflxvideo.net,real-ip
-
-  # FinalFantasy XIV Worldwide Server & CN Server
-  - DOMAIN-SUFFIX,square-enix.com,real-ip
-  - DOMAIN-SUFFIX,finalfantasyxiv.com,real-ip
-  - DOMAIN-SUFFIX,ffxiv.com,real-ip
-  - DOMAIN-SUFFIX,ff14.sdo.com,real-ip
-  - DOMAIN,ff.dorado.sdo.com,real-ip
-
-  # Bilibili
-  - DOMAIN-SUFFIX,mcdn.bilivideo.cn,real-ip
-
-  # Disney Plus
-  - DOMAIN-SUFFIX,media.dssott.com,real-ip
-
-  # shark007 Codecs
-  - DOMAIN,shark007.net,real-ip
-
-  # Mijia
-  - DOMAIN-SUFFIX,mi.com,real-ip
-  - DOMAIN-SUFFIX,io.mi.com,real-ip
-  - DOMAIN-SUFFIX,mijia.com,real-ip
-  - DOMAIN-SUFFIX,xiaomi.com,real-ip
-  - DOMAIN-SUFFIX,mi-img.com,real-ip
-  - DOMAIN-SUFFIX,miui.com,real-ip
-
-  # 招商银行
-  - DOMAIN-SUFFIX,cmbchina.com,real-ip
-  - DOMAIN-SUFFIX,cmbimg.com,real-ip
-
-  # AdGuard
-  - DOMAIN,local.adguard.org,real-ip
-
-  # 迅雷
-  - DOMAIN-SUFFIX,sandai.net,real-ip
-  - DOMAIN-SUFFIX,n0808.com,real-ip
-
-  # UU Plugin
-  - DOMAIN-SUFFIX,uu.163.com,real-ip
-  - DOMAIN,ps.res.netease.com,real-ip
-
-  # WiFi Calling
-  - DOMAIN-SUFFIX,pub.3gppnetwork.org,real-ip
-  
   - RULE-SET,cn,real-ip
   - MATCH,fake-ip
