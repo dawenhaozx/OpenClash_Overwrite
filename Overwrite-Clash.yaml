@@ -58,8 +58,8 @@ anchor:
   FilterUS: &FilterUS
      filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
-  # ☆
-  Filter☆: &Filter☆
+  # 自动回落
+  FilterO: &FilterO
      filter: >-
       ^(?=.*(?i)(☆)).*$
 
@@ -79,7 +79,7 @@ anchor:
     type: select
     include-all: true
     proxies:
-      - ☆
+      - 自动回落
       - 香港节点
       - 美国节点
       - 韩国节点
@@ -90,7 +90,7 @@ anchor:
     type: select
     proxies:
       - 手动选择
-      - ☆
+      - 自动回落
       - 香港节点
       - 美国节点
       - 韩国节点
@@ -217,8 +217,8 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
 
-  - name: ☆
-    <<: [*Fallback, *Filter☆]
+  - name: 自动回落
+    <<: [*Fallback, *FilterO]
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
 
   - name: 香港节点
