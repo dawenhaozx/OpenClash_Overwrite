@@ -35,7 +35,6 @@ anchor:
   Fallback: &Fallback
     type: fallback
     include-all: true
-    tolerance: 30
     interval: 60
     lazy: true
     timeout: 3000
