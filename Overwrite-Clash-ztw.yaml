@@ -375,22 +375,7 @@ rule-providers:
     url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
 
 dns:
-  enable: true
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  listen: 0.0.0.0:7874
-  respect-rules: false
   fake-ip-filter-mode: rule
-  nameserver:
-  - dhcp://"pppoe-wan"
-  - 172.16.0.1
-  - 192.168.50.1
-  - "[fe80::d2ef:c1ff:feea:dff7]:53"
-  - 120.196.165.24
-  - 211.136.192.6
-  - "[2409:8057:2000:6::8]:53"
-  - "[2409:8057:2000:2::8]:53"
   fake-ip-filter:
   - RULE-SET,private,real-ip
   - RULE-SET,connectivity-check,real-ip

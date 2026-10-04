@@ -399,7 +399,6 @@ rule-providers:
     url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
 
 dns:
-  enable: true
   fake-ip-filter-mode: rule
   fake-ip-filter:
   - RULE-SET,private,real-ip
