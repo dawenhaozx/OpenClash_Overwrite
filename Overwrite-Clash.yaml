@@ -9,13 +9,10 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      tolerance: 20
-      interval: 300
-      lazy: true
-      timeout: 5000
-      expected-status: 204
+      interval: 60
       url: "https://cp.cloudflare.com/generate_204"
     override:
+      mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
     filter: >-
@@ -28,8 +25,6 @@ anchor:
     tolerance: 20
     interval: 60
     lazy: true
-    timeout: 3000
-    expected-status: 204
     url: "https://cp.cloudflare.com/generate_204"
 
   Fallback: &Fallback
@@ -37,7 +32,6 @@ anchor:
     include-all: true
     interval: 60
     lazy: true
-    timeout: 3000
     url: https://cp.cloudflare.com/generate_204
 
   # 节点筛选正则
