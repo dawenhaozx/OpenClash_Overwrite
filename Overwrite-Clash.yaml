@@ -12,7 +12,7 @@ anchor:
       interval: 60
       url: "https://cp.cloudflare.com/generate_204"
     override:
-      mptcp: true
+      # mptcp: true
       udp: true
     path: ./proxy_provider/provider.yaml
     filter: >-
@@ -22,7 +22,7 @@ anchor:
   BaseUT: &BaseUT
     type: url-test
     include-all: true
-    tolerance: 20
+    tolerance: 30
     interval: 60
     lazy: true
     url: "https://cp.cloudflare.com/generate_204"
@@ -60,7 +60,7 @@ anchor:
   # SelectAU: &SelectAU
   #   type: url-test
   #   include-all: true
-  #   tolerance: 20
+  #   tolerance: 30
   #   interval: 300
   #   lazy: true
   #   timeout: 3000
