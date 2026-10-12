@@ -10,7 +10,7 @@ anchor:
     health-check:
       enable: true
       interval: 10
-      url: "https://g.cn/generate_204"
+      url: "http://www.gstatic.com/generate_204"
     override:
       # mptcp: true
       skip-cert-verify: true
@@ -25,13 +25,13 @@ anchor:
     include-all: true
     tolerance: 30
     interval: 120
-    url: "https://cp.cloudflare.com/generate_204"
+    url: "http://www.gstatic.com/generate_204"
 
   Fallback: &Fallback
     type: fallback
     include-all: true
     interval: 120
-    url: https://cp.cloudflare.com/generate_204
+    url: "http://www.gstatic.com/generate_204"
 
   # 节点筛选正则
   # # 香港
@@ -222,8 +222,8 @@ rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
-  # - RULE-SET,dawenhaozx_proxy,手动选择
-  # - RULE-SET,dawenhaozx_direct,全球直连
+  - RULE-SET,dawenhaozx_proxy,手动选择
+  - RULE-SET,dawenhaozx_direct,全球直连
 
   # ── 国内 / CDN 直连 ──
   - RULE-SET,Custom_Direct_Domain,全球直连
@@ -245,6 +245,7 @@ rules:
 
   # ── 谷歌 ──
   - RULE-SET,google,谷歌服务
+  - RULE-SET,google-ip,谷歌服务,no-resolve
 
   # ── Emby ──
   - RULE-SET,category-emby,Emby
@@ -252,9 +253,6 @@ rules:
 
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
-
-  - RULE-SET,gfw,手动选择
-  - RULE-SET,google-ip,谷歌服务,no-resolve
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
@@ -372,10 +370,10 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
 
-  # gfw
-  gfw:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+  # # gfw
+  # gfw:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
 
   # 国内直连
   cn:
