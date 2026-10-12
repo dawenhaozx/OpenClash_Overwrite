@@ -58,7 +58,7 @@ anchor:
   SelectAU: &SelectAU
     type: url-test
     include-all: true
-    tolerance: 20
+    tolerance: 30
     interval: 120
     filter: "^((?!(直连)).)*$"
 
