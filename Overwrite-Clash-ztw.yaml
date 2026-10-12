@@ -55,18 +55,18 @@ anchor:
      filter: "^((?!(直连)).)*$"
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-  SelectAU: &SelectAU
-    type: url-test
-    include-all: true
-    tolerance: 30
-    interval: 120
-    filter: "^((?!(直连)).)*$"
+  # SelectAU: &SelectAU
+  #   type: url-test
+  #   include-all: true
+  #   tolerance: 30
+  #   interval: 120
+  #   filter: "^((?!(直连)).)*$"
 
   SelectMS: &SelectMS
     type: select
     include-all: true
     proxies:
-      - 自动选择
+      # - 自动选择
       - 自动回落
       # - 香港节点
       # - 美国节点
@@ -79,7 +79,7 @@ anchor:
     proxies:
       - 手动选择
       - 自动回落
-      - 自动选择
+      # - 自动选择
       # - 美国节点
       # - 香港节点
       # - 韩国节点
@@ -166,9 +166,9 @@ proxy-groups:
     <<: *SelectMS
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
 
-  - name: 自动选择
-    <<: *SelectAU
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
+  # - name: 自动选择
+  #   <<: *SelectAU
+  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   - name: AI服务
     <<: *SelectMH
@@ -200,7 +200,7 @@ proxy-groups:
 
   - name: 自动回落
     <<: [*Fallback, *FilterFB]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/USA.png"
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   # - name: 韩国节点
   #   <<: [*BaseUT, *FilterKR]
