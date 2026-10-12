@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      interval: 10
+      interval: 300
       url: "http://www.gstatic.com/generate_204"
     override:
       # mptcp: true
