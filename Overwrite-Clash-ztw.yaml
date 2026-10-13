@@ -140,6 +140,7 @@ rules:
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,手动选择
   - RULE-SET,google-ip,手动选择,no-resolve
+  - RULE-SET,github,手动选择
   - RULE-SET,apple,全球直连
   - RULE-SET,microsoft,全球直连
 
@@ -239,6 +240,10 @@ rule-providers:
   apple:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+
+  github:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
 
   microsoft:
     <<: *domain
