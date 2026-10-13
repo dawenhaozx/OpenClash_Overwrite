@@ -391,10 +391,10 @@ rule-providers:
 dns:
   fake-ip-filter-mode: rule
   fake-ip-filter:
-  - RULE-SET,private,real-ip
+  # - RULE-SET,private,real-ip
   - RULE-SET,google,fake-ip
   - RULE-SET,fake_ip_filter,real-ip
-  - RULE-SET,connectivity-check,real-ip
+  # - RULE-SET,connectivity-check,real-ip
   # - RULE-SET,category-ai,fake-ip
   # - RULE-SET,category-entertainment,fake-ip
   # - RULE-SET,category-games@cn,real-ip
