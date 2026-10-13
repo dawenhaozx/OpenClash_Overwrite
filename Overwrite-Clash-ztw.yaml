@@ -380,26 +380,10 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
 
   #fakeip
-  connectivity-check:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
+  # connectivity-check:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
 
-  fake_ip_filter:
-    <<: *class
-    url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
-
-# dns:
-#   fake-ip-filter-mode: rule
-#   fake-ip-filter:
-#   - RULE-SET,private,real-ip
-#   - RULE-SET,fake_ip_filter,real-ip
-#   # - RULE-SET,connectivity-check,real-ip
-#   # - RULE-SET,category-ai,fake-ip
-#   # - RULE-SET,category-entertainment,fake-ip
-#   # - RULE-SET,category-games@cn,real-ip
-#   # - RULE-SET,dawenhaozx_direct,real-ip
-#   # - RULE-SET,Steam_CDN_Domain,real-ip
-#   # - RULE-SET,category-game-platforms-download,real-ip
-#   - RULE-SET,google,fake-ip
-#   - RULE-SET,cn,real-ip
-#   - MATCH,fake-ip
+  # fake_ip_filter:
+  #   <<: *class
+  #   url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
