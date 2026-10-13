@@ -9,7 +9,7 @@ anchor:
     proxy: DIRECT
     health-check:
       enable: true
-      interval: 60
+      interval: 300
       url: "http://www.gstatic.com/generate_204"
     override:
       # mptcp: true
@@ -23,15 +23,13 @@ anchor:
     type: url-test
     include-all: true
     tolerance: 30
-    interval: 60
-    lazy: true
+    interval: 120
     url: "http://www.gstatic.com/generate_204"
 
   Fallback: &Fallback
     type: fallback
     include-all: true
-    interval: 60
-    lazy: true
+    interval: 120
     url: "http://www.gstatic.com/generate_204"
 
   # 节点筛选正则
@@ -57,17 +55,6 @@ anchor:
       ^(?=.*(?i)(☆)).*$
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-  # SelectAU: &SelectAU
-  #   type: url-test
-  #   include-all: true
-  #   tolerance: 30
-  #   interval: 300
-  #   lazy: true
-  #   timeout: 3000
-  #   expected-status: 204
-  #   url: "https://cp.cloudflare.com/generate_204"
-  #   filter: "^((?!(直连)).)*$"
-
   SelectMS: &SelectMS
     type: select
     include-all: true
@@ -92,46 +79,6 @@ anchor:
       - REJECT
     use:
       - Sub-store
-
-  # SelectHK: &SelectHK
-  #   type: select
-  #   proxies:
-  #     - 香港节点
-  #     - 美国节点
-  #     - 新加坡节点
-  #     - 韩国节点
-  #     - 手动选择
-  #     - 全球直连
-
-  # SelectUS: &SelectUS
-  #   type: select
-  #   proxies:
-  #     - 美国节点
-  #     - 香港节点
-  #     - 新加坡节点
-  #     - 韩国节点
-  #     - 手动选择
-  #     - 全球直连
-
-  # SelectSG: &SelectSG
-  #   type: select
-  #   proxies:
-  #     - 新加坡节点
-  #     - 香港节点
-  #     - 美国节点
-  #     - 韩国节点
-  #     - 手动选择
-  #     - 全球直连
-
-  # SelectKR: &SelectKR
-  #   type: select
-  #   proxies:
-  #     - 韩国节点
-  #     - 香港节点
-  #     - 美国节点
-  #     - 新加坡节点
-  #     - 手动选择
-  #     - 全球直连
 
 # 规则提供者模板
   ip: &ip
@@ -170,17 +117,9 @@ proxy-groups:
     <<: *SelectMS
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/11111.png"
 
-  # - name: 自动选择
-  #   <<: *SelectAU
-  #   icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
-
   - name: AI服务
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/AI_bot.png"
-
-  - name: Sony
-    <<: *SelectMH
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/TikTok.png"
 
   - name: Emby
     <<: *SelectMH
@@ -212,7 +151,7 @@ proxy-groups:
 
   - name: 自动回落
     <<: [*Fallback, *FilterO]
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
 
   - name: 香港节点
     <<: [*BaseUT, *FilterHK]
@@ -240,8 +179,8 @@ proxy-groups:
 # =========================================
 rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
-  - SRC-IP-CIDR,192.168.50.140/32,DIRECT
-  - SRC-IP-CIDR,192.168.50.239/32,DIRECT
+  # - SRC-IP-CIDR,192.168.50.140/32,DIRECT
+  # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
@@ -264,7 +203,7 @@ rules:
   - RULE-SET,category-ai,AI服务
 
   # ── Sony ──
-  - RULE-SET,sony,Sony
+  - RULE-SET,sony,REJECT
 
   # ── Steam ──
   - RULE-SET,steam,Steam
@@ -406,28 +345,3 @@ rule-providers:
   cn-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
-
-  #fakeip
-  connectivity-check:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
-
-  fake_ip_filter:
-    <<: *class
-    url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
-
-dns:
-  fake-ip-filter-mode: rule
-  fake-ip-filter:
-  - RULE-SET,private,real-ip
-  - RULE-SET,category-ai,fake-ip
-  - RULE-SET,google,fake-ip
-  - RULE-SET,category-entertainment,fake-ip
-  - RULE-SET,connectivity-check,real-ip
-  - RULE-SET,fake_ip_filter,real-ip
-  - RULE-SET,category-games@cn,real-ip
-  # - RULE-SET,dawenhaozx_direct,real-ip
-  # - RULE-SET,Steam_CDN_Domain,real-ip
-  # - RULE-SET,category-game-platforms-download,real-ip
-  - RULE-SET,cn,real-ip
-  - MATCH,fake-ip
