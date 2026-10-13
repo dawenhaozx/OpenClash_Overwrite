@@ -391,8 +391,7 @@ rule-providers:
 dns:
   fake-ip-filter-mode: rule
   fake-ip-filter:
-  # - RULE-SET,private,real-ip
-  - RULE-SET,google,fake-ip
+  - RULE-SET,private,real-ip
   - RULE-SET,fake_ip_filter,real-ip
   # - RULE-SET,connectivity-check,real-ip
   # - RULE-SET,category-ai,fake-ip
@@ -401,5 +400,6 @@ dns:
   # - RULE-SET,dawenhaozx_direct,real-ip
   # - RULE-SET,Steam_CDN_Domain,real-ip
   # - RULE-SET,category-game-platforms-download,real-ip
+  - RULE-SET,google,fake-ip
   - RULE-SET,cn,real-ip
   - MATCH,fake-ip
