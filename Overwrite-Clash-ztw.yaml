@@ -5,7 +5,7 @@ anchor:
   # 代理提供商锚点
   BaseProvider: &BaseProvider
     type: http
-    interval: 3600
+    interval: 28800
     proxy: DIRECT
     health-check:
       enable: true
