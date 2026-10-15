@@ -28,9 +28,14 @@ anchor:
 
   Fallback: &Fallback
     type: fallback
-    include-all: true
     interval: 120
     url: "http://www.gstatic.com/generate_204"
+    proxies:
+      - O
+      - 新加坡节点
+      - 韩国节点
+      - 香港节点
+      - 美国节点
 
   # 节点筛选正则
   # 香港
@@ -49,7 +54,7 @@ anchor:
   FilterUS: &FilterUS
      filter: >-
       ^(?=.*(?i)(美|🇺🇸|US|USA|SJC|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$
-  # 自动回落
+  # O
   FilterO: &FilterO
      filter: >-
       ^(?=.*(?i)(☆)).*$
@@ -150,8 +155,12 @@ proxy-groups:
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
 
   - name: 自动回落
-    <<: [*Fallback, *FilterO]
+    <<: *Fallback
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Flight.png"
+
+  - name: O
+    <<: [*BaseUT, *FilterO]
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Hong_Kong.png"
 
   - name: 香港节点
     <<: [*BaseUT, *FilterHK]
