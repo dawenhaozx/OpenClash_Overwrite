@@ -12,7 +12,6 @@ anchor:
       interval: 300
       url: "http://www.gstatic.com/generate_204"
     override:
-      # mptcp: true
       skip-cert-verify: true
       udp: true
     path: ./proxy_provider/provider.yaml
