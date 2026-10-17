@@ -223,6 +223,7 @@ rules:
   - RULE-SET,google,谷歌服务
   - RULE-SET,google-ip,谷歌服务,no-resolve
   - RULE-SET,apple,苹果服务
+  - RULE-SET,github,手动选择
   - RULE-SET,microsoft,微软服务
 
   # ── Emby ──
@@ -321,6 +322,10 @@ rule-providers:
   apple:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+
+  github:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
 
   microsoft:
     <<: *domain
