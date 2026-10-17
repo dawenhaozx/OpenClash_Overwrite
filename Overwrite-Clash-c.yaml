@@ -141,7 +141,7 @@ rules:
   - RULE-SET,google-ip,手动选择,no-resolve
   - RULE-SET,github,手动选择
   - RULE-SET,apple,手动选择
-  - RULE-SET,microsoft,手动选择
+  - RULE-SET,microsoft,全球直连
 
   # ── Emby ──
   - RULE-SET,category-emby,手动选择
