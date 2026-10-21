@@ -208,7 +208,6 @@ rules:
   - RULE-SET,Steam_CDN_Domain,全球直连
   - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
   - RULE-SET,category-game-platforms-download,全球直连
-  - RULE-SET,category-public-tracker,全球直连
 
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
@@ -234,7 +233,7 @@ rules:
   - RULE-SET,category-entertainment,国外媒体
 
   # ── 国内直连──
-  - RULE-SET,cn,全球直连
+  - RULE-SET,oc-cn-domain,全球直连
   - RULE-SET,cn-ip,全球直连,no-resolve
 
   # ── 最终兜底 ──
@@ -299,9 +298,9 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-game-platforms-download.mrs"
 
-  category-public-tracker:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
+  # category-public-tracker:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
 
   # AI
   category-ai:
@@ -354,9 +353,9 @@ rule-providers:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
 
   # 国内直连
-  cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  # cn:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 
   cn-ip:
     <<: *ip
