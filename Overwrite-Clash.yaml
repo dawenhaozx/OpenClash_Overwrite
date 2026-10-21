@@ -148,6 +148,10 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
 
+  - name: 网络测试
+    <<: *SelectMH
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
+
   - name: Steam
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
@@ -195,6 +199,7 @@ rules:
   # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
+  - RULE-SET,category-public-tracker,全球直连
   - RULE-SET,dawenhaozx_proxy,手动选择
   - RULE-SET,dawenhaozx_direct,全球直连
 
@@ -208,6 +213,8 @@ rules:
   - RULE-SET,Steam_CDN_Domain,全球直连
   - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
   - RULE-SET,category-game-platforms-download,全球直连
+  - RULE-SET,apple-cn,全球直连
+  - RULE-SET,microsoft-cn,全球直连
 
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
@@ -232,8 +239,11 @@ rules:
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
 
+  # ── 网络测试 ──
+  - RULE-SET,networktest,网络测试
+
   # ── 国内直连──
-  - RULE-SET,oc-cn-domain,全球直连
+  - RULE-SET,cn,全球直连
   - RULE-SET,cn-ip,全球直连,no-resolve
 
   # ── 最终兜底 ──
@@ -298,9 +308,9 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-game-platforms-download.mrs"
 
-  # category-public-tracker:
-  #   <<: *domain
-  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
+  category-public-tracker:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
 
   # AI
   category-ai:
@@ -352,10 +362,23 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
 
+  # 网络测试
+  networktest:
+    <<: *domain
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/networktest.mrs"
+
   # 国内直连
-  # cn:
-  #   <<: *domain
-  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  apple-cn:
+    <<: *domain
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs"
+
+  microsoft-cn:
+    <<: *domain
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs"
+
+  cn:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 
   cn-ip:
     <<: *ip
