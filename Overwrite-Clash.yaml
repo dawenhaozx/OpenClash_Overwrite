@@ -196,7 +196,7 @@ rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
   # - SRC-IP-CIDR,192.168.50.140/32,DIRECT
   # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
-  # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
+  - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
   - RULE-SET,category-public-tracker,全球直连
@@ -225,6 +225,9 @@ rules:
   # ── Steam ──
   - RULE-SET,steam,Steam
 
+  # ── 国外媒体 ──
+  - RULE-SET,category-entertainment,国外媒体
+
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,谷歌服务
   - RULE-SET,google-ip,谷歌服务,no-resolve
@@ -235,9 +238,6 @@ rules:
   # ── Emby ──
   - RULE-SET,category-emby,Emby
   - RULE-SET,dawenhaozx_emby,Emby
-
-  # ── 国外媒体 ──
-  - RULE-SET,category-entertainment,国外媒体
 
   # ── 网络测试 ──
   - RULE-SET,networktest,网络测试
