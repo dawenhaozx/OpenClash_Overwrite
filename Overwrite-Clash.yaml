@@ -12,7 +12,6 @@ anchor:
       interval: 300
       url: "http://www.gstatic.com/generate_204"
     override:
-      tfo: true
       mptcp: true
       udp: true
       skip-cert-verify: true
