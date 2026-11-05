@@ -240,6 +240,7 @@ rules:
 
   # ── 网络测试 ──
   - RULE-SET,networktest,网络测试
+  - RULE-SET,stun,手动选择
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
@@ -364,16 +365,20 @@ rule-providers:
   # 网络测试
   networktest:
     <<: *domain
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/networktest.mrs"
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/networktest.mrs"
+
+  stun:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-stun.mrs"
 
   # 国内直连
   apple-cn:
     <<: *domain
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs"
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs"
 
   microsoft-cn:
     <<: *domain
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs"
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs"
 
   cn:
     <<: *domain
