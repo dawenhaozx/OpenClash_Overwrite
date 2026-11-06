@@ -239,8 +239,9 @@ rules:
   - RULE-SET,dawenhaozx_emby,Emby
 
   # ── 网络测试 ──
-  - RULE-SET,networktest,网络测试
+  - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
+  - RULE-SET,networktest,网络测试
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
@@ -370,6 +371,17 @@ rule-providers:
   stun:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-stun.mrs"
+
+  # 补充当前集合缺少的测试目标
+  stun-extra:
+    type: inline
+    behavior: domain
+    payload:
+      - "+.stun.twilio.com"
+      - stun.cloudflare.com
+      - ipv4.am.i.mullvad.net
+      - ipv6.am.i.mullvad.net
+      - stunserver.stunprotocol.org
 
   # 国内直连
   apple-cn:
