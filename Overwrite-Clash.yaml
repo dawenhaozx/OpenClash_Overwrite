@@ -233,6 +233,7 @@ rules:
   - RULE-SET,apple,苹果服务
   - RULE-SET,github,手动选择
   - RULE-SET,microsoft,微软服务
+  - RULE-SET,gfw,手动选择
 
   # ── Emby ──
   - RULE-SET,category-emby,Emby
@@ -348,6 +349,10 @@ rule-providers:
   google-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+
+  gfw:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
 
   # Emby
   category-emby:
