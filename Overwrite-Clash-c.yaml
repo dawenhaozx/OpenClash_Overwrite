@@ -136,6 +136,9 @@ rules:
   # ── Steam ──
   - RULE-SET,steam,手动选择
 
+  # ── 国外媒体 ──
+  - RULE-SET,category-entertainment,国外媒体
+
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,手动选择
   - RULE-SET,google-ip,手动选择,no-resolve
@@ -143,13 +146,11 @@ rules:
   - RULE-SET,apple,手动选择
   - RULE-SET,github,手动选择
   - RULE-SET,microsoft,全球直连
+  - RULE-SET,gfw,手动选择
 
   # ── Emby ──
   - RULE-SET,category-emby,手动选择
   - RULE-SET,dawenhaozx_emby,手动选择
-
-  # ── 国外媒体 ──
-  - RULE-SET,category-entertainment,国外媒体
 
   # ── 国内直连──
   - RULE-SET,cn,全球直连
@@ -256,6 +257,10 @@ rule-providers:
   google-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+
+  gfw:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
 
   # Emby
   category-emby:
