@@ -5,14 +5,14 @@ anchor:
   # 代理提供商锚点
   BaseProvider: &BaseProvider
     type: http
-    interval: 28800
+    interval: 3600
     proxy: DIRECT
     health-check:
       enable: true
       interval: 300
       url: "http://www.gstatic.com/generate_204"
     override:
-      mptcp: true
+      tfo: true
       udp: true
       skip-cert-verify: true
     path: ./proxy_provider/provider.yaml
