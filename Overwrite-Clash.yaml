@@ -154,7 +154,7 @@ dns:
     - RULE-SET,apple,fake-ip
     - RULE-SET,github,fake-ip
     - RULE-SET,microsoft,fake-ip
-    - RULE-SET,gfw,fake-ip
+    # - RULE-SET,gfw,fake-ip
     - RULE-SET,category-emby,fake-ip
     - RULE-SET,dawenhaozx_emby,fake-ip
     - RULE-SET,networktest,fake-ip
@@ -176,8 +176,8 @@ dns:
 
   # 未命中的真实 DNS 查询默认通过自动回落组，独立于业务分组的手选节点。
   nameserver: &RemoteDNS
-    - "https://1.1.1.1/dns-query#自动回落"
-    - "https://8.8.8.8/dns-query#自动回落"
+    - "https://1.1.1.1/dns-query#手动选择"
+    - "https://8.8.8.8/dns-query#手动选择"
   nameserver-policy:
     "rule-set:private,category-public-tracker": *DomesticDNS
     "rule-set:dawenhaozx_proxy": *RemoteDNS
@@ -343,8 +343,8 @@ rule-providers:
 
   # Fake-IP 真实地址兼容规则
   fake_ip_filter:
-    <<: *class
-    url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/fake_ip_filter.list"
+    <<: *domain
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
 
   connectivity-check:
     <<: *domain
