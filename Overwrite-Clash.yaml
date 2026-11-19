@@ -154,7 +154,7 @@ dns:
     - RULE-SET,apple,fake-ip
     - RULE-SET,github,fake-ip
     - RULE-SET,microsoft,fake-ip
-    # - RULE-SET,gfw,fake-ip
+    - RULE-SET,gfw,fake-ip
     - RULE-SET,category-emby,fake-ip
     - RULE-SET,dawenhaozx_emby,fake-ip
     - RULE-SET,networktest,fake-ip
