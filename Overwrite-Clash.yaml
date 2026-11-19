@@ -124,7 +124,7 @@ dns:
   fake-ip-range: 198.18.0.1/16
   # IPv6 Fake-IP 池由 OpenClash 管理，使地址池与防火墙设置一致。
   fake-ip-filter-mode: rule
-  # Overwrite.conf 的 [YAML] 段会清理大陆绕过自动前插的 real-ip 项。
+  # Overwrite.conf 的 [YAML] 段会将 oc-cn-domain 移到显式规则之后、MATCH 之前。
   fake-ip-filter:
     # 保留本地域名和直连例外，显式代理名单优先于通用国内规则。
     - RULE-SET,private,real-ip
@@ -187,7 +187,7 @@ dns:
     "rule-set:apple-cn,microsoft-cn": *DomesticDNS
     "rule-set:category-ai,sony,steam,category-entertainment,google,apple,github,microsoft,gfw": *RemoteDNS
     "rule-set:category-emby,dawenhaozx_emby,stun-extra,stun,networktest": *RemoteDNS
-    "rule-set:cn": *DomesticDNS
+    "rule-set:oc-cn-domain": *DomesticDNS
 
 # 策略组
 # =========================================
@@ -320,7 +320,7 @@ rules:
   - RULE-SET,networktest,网络测试
 
   # ── 国内直连──
-  - RULE-SET,cn,全球直连
+  - RULE-SET,oc-cn-domain,全球直连
   # 已知目的 IP 可匹配国内直连；只有域名时不为这条规则主动发起解析。
   - RULE-SET,cn-ip,全球直连,no-resolve
 
@@ -478,9 +478,12 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/microsoft-cn.mrs"
 
-  cn:
+  # 与 OpenClash 自动注册同名，统一使用同一规则集和缓存文件。
+  oc-cn-domain:
     <<: *domain
+    interval: 43200
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    path: ./rule_provider/oc-cn-domain.mrs
 
   cn-ip:
     <<: *ip
