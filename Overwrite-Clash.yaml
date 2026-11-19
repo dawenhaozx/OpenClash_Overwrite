@@ -244,8 +244,8 @@ rules:
   - RULE-SET,networktest,网络测试
 
   # ── 国内直连──
-  - RULE-SET,cn,全球直连
-  - RULE-SET,cn-ip,全球直连
+  - RULE-SET,oc-cn-domain,全球直连
+  - RULE-SET,cn-ip,全球直连,no-resolve
 
   # ── 最终兜底 ──
   - MATCH,漏网之鱼
@@ -392,9 +392,9 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/microsoft-cn.mrs"
 
-  cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+  # cn:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 
   cn-ip:
     <<: *ip
