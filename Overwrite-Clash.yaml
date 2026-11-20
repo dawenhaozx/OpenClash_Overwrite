@@ -154,40 +154,13 @@ dns:
     - RULE-SET,apple,fake-ip
     - RULE-SET,github,fake-ip
     - RULE-SET,microsoft,fake-ip
-    - RULE-SET,gfw,fake-ip
     - RULE-SET,category-emby,fake-ip
     - RULE-SET,dawenhaozx_emby,fake-ip
     - RULE-SET,networktest,fake-ip
+    - RULE-SET,gfw,fake-ip
 
     # 国内域名和未识别域名都返回真实地址，上游由下方策略选择。
-    - MATCH,real-ip
-
-  # 节点地址和 DNS 引导走直连，避免启动时反过来依赖代理。
-  respect-rules: false
-  default-nameserver: &BootstrapDNS
-    - 223.5.5.5
-    - 119.29.29.29
-  proxy-server-nameserver: *BootstrapDNS
-  # 国内域名策略与直连出站共用固定的国内 DoH 上游。
-  direct-nameserver: &DomesticDNS
-    - "https://223.5.5.5/dns-query#DIRECT"
-    - "https://1.12.12.12/dns-query#DIRECT"
-  direct-nameserver-follow-policy: false
-
-  # 未命中的真实 DNS 查询默认通过自动回落组，独立于业务分组的手选节点。
-  nameserver: &RemoteDNS
-    - "https://1.1.1.1/dns-query#手动选择"
-    - "https://8.8.8.8/dns-query#手动选择"
-  nameserver-policy:
-    "rule-set:private,category-public-tracker": *DomesticDNS
-    "rule-set:dawenhaozx_proxy": *RemoteDNS
-    "rule-set:dawenhaozx_direct,Custom_Direct_Domain": *DomesticDNS
-    "rule-set:Custom_Proxy_Domain": *RemoteDNS
-    "rule-set:category-games@cn,Steam_CDN_Domain,category-game-platforms-download": *DomesticDNS
-    "rule-set:apple-cn,microsoft-cn": *DomesticDNS
-    "rule-set:category-ai,sony,steam,category-entertainment,google,apple,github,microsoft,gfw": *RemoteDNS
-    "rule-set:category-emby,dawenhaozx_emby,stun-extra,stun,networktest": *RemoteDNS
-    "rule-set:oc-cn-domain": *DomesticDNS
+    - MATCH,fake-ip
 
 # 策略组
 # =========================================
@@ -308,7 +281,6 @@ rules:
   - RULE-SET,apple,苹果服务
   - RULE-SET,github,手动选择
   - RULE-SET,microsoft,微软服务
-  - RULE-SET,gfw,手动选择
 
   # ── Emby ──
   - RULE-SET,category-emby,Emby
@@ -318,6 +290,8 @@ rules:
   - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
   - RULE-SET,networktest,网络测试
+
+  - RULE-SET,gfw,手动选择
 
   # ── 国内直连──
   - RULE-SET,oc-cn-domain,全球直连
@@ -481,7 +455,6 @@ rule-providers:
   # 与 OpenClash 自动注册同名，统一使用同一规则集和缓存文件。
   oc-cn-domain:
     <<: *domain
-    interval: 43200
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
     path: ./rule_provider/oc-cn-domain.mrs
 
