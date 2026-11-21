@@ -287,10 +287,10 @@ rules:
   - RULE-SET,category-emby,Emby
   - RULE-SET,dawenhaozx_emby,Emby
 
-  # ── 网络测试 ──
+  # ── 网速测试 ──
   - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
-  - RULE-SET,speedtest,网络测试
+  - RULE-SET,speedtest,网速测试
 
   - RULE-SET,gfw,手动选择
 
