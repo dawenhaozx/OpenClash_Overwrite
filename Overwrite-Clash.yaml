@@ -138,8 +138,6 @@ dns:
     - RULE-SET,category-games@cn,real-ip
     - RULE-SET,Steam_CDN_Domain,real-ip
     - RULE-SET,category-game-platforms-download,real-ip
-    - RULE-SET,apple-cn,real-ip
-    - RULE-SET,microsoft-cn,real-ip
     - RULE-SET,connectivity-check,real-ip
     - RULE-SET,stun-extra,real-ip
     - RULE-SET,stun,real-ip
@@ -148,6 +146,7 @@ dns:
     # 有明确出站策略的域名用 Fake-IP 保留域名映射。
     - RULE-SET,category-ai,fake-ip
     - RULE-SET,sony,fake-ip
+    - RULE-SET,nintendo,fake-ip
     - RULE-SET,steam,fake-ip
     - RULE-SET,category-entertainment,fake-ip
     - RULE-SET,google,fake-ip
@@ -156,7 +155,7 @@ dns:
     - RULE-SET,microsoft,fake-ip
     - RULE-SET,category-emby,fake-ip
     - RULE-SET,dawenhaozx_emby,fake-ip
-    - RULE-SET,networktest,fake-ip
+    - RULE-SET,speedtest,fake-ip
     - RULE-SET,gfw,fake-ip
 
     # 国内域名和未识别域名都返回真实地址，上游由下方策略选择。
@@ -196,7 +195,11 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Microsoft.png"
 
-  - name: 网络测试
+  - name: 游戏主机服务
+    <<: *SelectMH
+    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Steam.png"
+
+  - name: 网速测试
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
@@ -244,7 +247,6 @@ rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
   # - SRC-IP-CIDR,192.168.50.140/32,DIRECT
   # - SRC-IP-CIDR,192.168.50.239/32,DIRECT
-  - SRC-IP-CIDR,192.168.50.239/32,DIRECT
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
   - RULE-SET,category-public-tracker,全球直连
@@ -260,14 +262,13 @@ rules:
   - RULE-SET,Steam_CDN_Domain,全球直连
   - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
   - RULE-SET,category-game-platforms-download,全球直连
-  - RULE-SET,apple-cn,全球直连
-  - RULE-SET,microsoft-cn,全球直连
 
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
 
   # ── Sony ──
-  - RULE-SET,sony,REJECT
+  - RULE-SET,sony,游戏主机服务
+  - RULE-SET,nintendo,游戏主机服务
 
   # ── Steam ──
   - RULE-SET,steam,Steam
@@ -289,7 +290,7 @@ rules:
   # ── 网络测试 ──
   - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
-  - RULE-SET,networktest,网络测试
+  - RULE-SET,speedtest,网络测试
 
   - RULE-SET,gfw,手动选择
 
@@ -379,6 +380,11 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
 
+  # nintendo
+  nintendo:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs"
+
   # Steam / 谷歌 / 微软 / 苹果
 
   steam:
@@ -423,10 +429,10 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
 
-  # 网络测试
-  networktest:
+  # 网速测试
+  speedtest:
     <<: *domain
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/networktest.mrs"
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs"
 
   stun:
     <<: *domain
@@ -442,15 +448,6 @@ rule-providers:
       - ipv4.am.i.mullvad.net
       - ipv6.am.i.mullvad.net
       - stunserver.stunprotocol.org
-
-  # 国内直连
-  apple-cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/apple-cn.mrs"
-
-  microsoft-cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/microsoft-cn.mrs"
 
   # 与 OpenClash 自动注册同名，统一使用同一规则集和缓存文件。
   oc-cn-domain:
