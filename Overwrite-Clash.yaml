@@ -156,7 +156,7 @@ dns:
     - RULE-SET,category-emby,fake-ip
     - RULE-SET,dawenhaozx_emby,fake-ip
     - RULE-SET,speedtest,fake-ip
-    - RULE-SET,gfw,fake-ip
+    # - RULE-SET,gfw,fake-ip
 
     # 国内域名和未识别域名都返回真实地址，上游由下方策略选择。
     - MATCH,fake-ip
@@ -292,7 +292,7 @@ rules:
   - RULE-SET,stun,手动选择
   - RULE-SET,speedtest,网速测试
 
-  - RULE-SET,gfw,手动选择
+  # - RULE-SET,gfw,手动选择
 
   # ── 国内直连──
   - RULE-SET,oc-cn-domain,全球直连
@@ -411,9 +411,9 @@ rule-providers:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
 
-  gfw:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+  # gfw:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
 
   # Emby
   category-emby:
