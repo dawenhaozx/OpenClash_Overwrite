@@ -145,7 +145,7 @@ rules:
   - RULE-SET,github,手动选择
   - RULE-SET,apple,全球直连
   - RULE-SET,microsoft,全球直连
-  - RULE-SET,gfw,手动选择
+  # - RULE-SET,gfw,手动选择
 
   # ── Emby ──
   - RULE-SET,category-emby,全球直连
@@ -261,9 +261,9 @@ rule-providers:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
 
-  gfw:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+  # gfw:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
 
   # Emby
   category-emby:
