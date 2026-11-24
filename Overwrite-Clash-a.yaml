@@ -139,10 +139,6 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
-  - name: 谷歌服务
-    <<: *SelectMH
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
-
   - name: 漏网之鱼
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
@@ -182,15 +178,15 @@ rules:
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
 
-  # ── Steam ──
+  # # ── Steam ──
   # - RULE-SET,steam,Steam
 
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
 
   # ── 谷歌（域名 + IP 双覆盖）──
-  - RULE-SET,google,谷歌服务
-  - RULE-SET,google-ip,谷歌服务,no-resolve
+  - RULE-SET,google,手动选择
+  - RULE-SET,google-ip,手动选择,no-resolve
   - RULE-SET,apple,手动选择
   - RULE-SET,github,手动选择
   - RULE-SET,microsoft,全球直连
@@ -202,6 +198,8 @@ rules:
   # ── 网速测试 ──
   - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
+
+  # - RULE-SET,gfw,手动选择
 
   # ── 国内直连──
   - RULE-SET,oc-cn-domain,全球直连
@@ -224,15 +222,6 @@ rule-providers:
   dawenhaozx_proxy:
     <<: *class
     url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/proxy.list"
-
-  # Fake-IP 真实地址兼容规则
-  fake_ip_filter:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
-
-  connectivity-check:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
 
   # 国内 CDN / 游戏直连 / 私有
   private:
@@ -367,3 +356,12 @@ rule-providers:
   cn-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+
+  # Fake-IP 真实地址兼容规则
+  fake_ip_filter:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
+
+  connectivity-check:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"

@@ -91,10 +91,6 @@ proxy-groups:
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Network.png"
 
-  - name: 谷歌服务
-    <<: *SelectMH
-    icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/HOMOMIX/Color/Large/Google.png"
-
   - name: 漏网之鱼
     <<: *SelectMH
     icon: "https://raw.githubusercontent.com/Giveupmoon/Clash_Rules_Yaml/main/Icon/match.png"
@@ -115,6 +111,7 @@ rules:
   # ── 私有地址 & 自定义名单（最高优先级）──
   - RULE-SET,private,全球直连
   - RULE-SET,private_ip,全球直连,no-resolve
+  - RULE-SET,category-public-tracker,全球直连
   - RULE-SET,dawenhaozx_proxy,手动选择
   - RULE-SET,dawenhaozx_direct,全球直连
 
@@ -128,13 +125,12 @@ rules:
   - RULE-SET,Steam_CDN_Domain,全球直连
   - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
   - RULE-SET,category-game-platforms-download,全球直连
-  - RULE-SET,category-public-tracker,全球直连
 
   # ── AI 服务 ──
   - RULE-SET,category-ai,AI服务
 
-  # ── Steam ──
-  - RULE-SET,steam,全球直连
+  # # ── Steam ──
+  # - RULE-SET,steam,手动选择
 
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
@@ -142,21 +138,23 @@ rules:
   # ── 谷歌（域名 + IP 双覆盖）──
   - RULE-SET,google,手动选择
   - RULE-SET,google-ip,手动选择,no-resolve
+  - RULE-SET,apple,手动选择
   - RULE-SET,github,手动选择
-  - RULE-SET,apple,全球直连
   - RULE-SET,microsoft,全球直连
-  # - RULE-SET,gfw,手动选择
 
   # ── Emby ──
-  - RULE-SET,category-emby,全球直连
-  - RULE-SET,dawenhaozx_emby,全球直连
+  - RULE-SET,category-emby,手动选择
+  - RULE-SET,dawenhaozx_emby,手动选择
+
+  # - RULE-SET,gfw,手动选择
 
   # ── 网络测试 ──
   - RULE-SET,stun-extra,手动选择
   - RULE-SET,stun,手动选择
-
+  
   # ── 国内直连──
-  - RULE-SET,cn,全球直连
+  - RULE-SET,oc-cn-domain,全球直连
+  # 已知目的 IP 可匹配国内直连；只有域名时不为这条规则主动发起解析。
   - RULE-SET,cn-ip,全球直连,no-resolve
 
   # ── 最终兜底 ──
@@ -201,10 +199,6 @@ rule-providers:
     <<: *ip
     url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/rule/Custom_Proxy_IP.mrs"
 
-  google-cn:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs"
-
   category-games@cn:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs"
@@ -230,16 +224,21 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
 
-  # Sony
-  sony:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
+  # # Sony
+  # sony:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs"
+
+  # # nintendo
+  # nintendo:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs"
 
   # Steam / 谷歌 / 微软 / 苹果
 
-  steam:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+  # steam:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
 
   apple:
     <<: *domain
@@ -279,7 +278,11 @@ rule-providers:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment.mrs"
 
-  # 网络测试
+  # # 网速测试
+  # speedtest:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs"
+
   stun:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-stun.mrs"
@@ -296,10 +299,20 @@ rule-providers:
       - stunserver.stunprotocol.org
 
   # 国内直连
-  cn:
+  oc-cn-domain:
     <<: *domain
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+    path: ./rule_provider/oc-cn-domain.mrs
 
   cn-ip:
     <<: *ip
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+
+  # # Fake-IP 真实地址兼容规则
+  # fake_ip_filter:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
+
+  # connectivity-check:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
