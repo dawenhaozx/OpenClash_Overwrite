@@ -183,7 +183,7 @@ rules:
   - RULE-SET,category-ai,AI服务
 
   # ── Steam ──
-  - RULE-SET,steam,Steam
+  # - RULE-SET,steam,Steam
 
   # ── 国外媒体 ──
   - RULE-SET,category-entertainment,国外媒体
@@ -296,9 +296,9 @@ rule-providers:
 
   # Steam / 谷歌 / 微软 / 苹果
 
-  steam:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+  # steam:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
 
   apple:
     <<: *domain
