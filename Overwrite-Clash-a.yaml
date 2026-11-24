@@ -196,8 +196,8 @@ rules:
   - RULE-SET,microsoft,全球直连
 
   # ── Emby ──
-  - RULE-SET,category-emby,Emby
-  - RULE-SET,dawenhaozx_emby,Emby
+  - RULE-SET,category-emby,手动选择
+  - RULE-SET,dawenhaozx_emby,手动选择
 
   # ── 网速测试 ──
   - RULE-SET,stun-extra,手动选择
