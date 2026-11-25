@@ -113,54 +113,6 @@ proxy-providers:
     <<: *BaseProvider
     url: "url"
 
-# =========================================
-#                 DNS 配置
-# =========================================
-dns:
-  enable: true
-  listen: 0.0.0.0:7874
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  # IPv6 Fake-IP 池由 OpenClash 管理，使地址池与防火墙设置一致。
-  fake-ip-filter-mode: rule
-  # Overwrite.conf 的 [YAML] 段会将 oc-cn-domain 移到显式规则之后、MATCH 之前。
-  fake-ip-filter:
-    # 保留本地域名和直连例外，显式代理名单优先于通用国内规则。
-    - RULE-SET,private,real-ip
-    - RULE-SET,category-public-tracker,real-ip
-    - RULE-SET,dawenhaozx_proxy,fake-ip
-    - RULE-SET,dawenhaozx_direct,real-ip
-    - RULE-SET,Custom_Direct_Domain,real-ip
-    - RULE-SET,Custom_Proxy_Domain,fake-ip
-
-    # 国内下载、连通性探测和 STUN 使用真实地址。
-    - RULE-SET,category-games@cn,real-ip
-    - RULE-SET,Steam_CDN_Domain,real-ip
-    - RULE-SET,category-game-platforms-download,real-ip
-    - RULE-SET,connectivity-check,real-ip
-    - RULE-SET,stun-extra,real-ip
-    - RULE-SET,stun,real-ip
-    - RULE-SET,fake_ip_filter,real-ip
-
-    # 有明确出站策略的域名用 Fake-IP 保留域名映射。
-    - RULE-SET,category-ai,fake-ip
-    - RULE-SET,sony,fake-ip
-    - RULE-SET,nintendo,fake-ip
-    - RULE-SET,steam,fake-ip
-    - RULE-SET,category-entertainment,fake-ip
-    - RULE-SET,google,fake-ip
-    - RULE-SET,apple,fake-ip
-    - RULE-SET,github,fake-ip
-    - RULE-SET,microsoft,fake-ip
-    - RULE-SET,category-emby,fake-ip
-    - RULE-SET,dawenhaozx_emby,fake-ip
-    - RULE-SET,speedtest,fake-ip
-    # - RULE-SET,gfw,fake-ip
-
-    # 国内域名和未识别域名都返回真实地址，上游由下方策略选择。
-    - MATCH,fake-ip
-
 # 策略组
 # =========================================
 #             策略组配置
@@ -316,15 +268,6 @@ rule-providers:
     <<: *class
     url: "https://raw.githubusercontent.com/dawenhaozx/OpenClash_Overwrite/refs/heads/rules/proxy.list"
 
-  # Fake-IP 真实地址兼容规则
-  fake_ip_filter:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
-
-  connectivity-check:
-    <<: *domain
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
-
   # 国内 CDN / 游戏直连 / 私有
   private:
     <<: *domain
@@ -448,6 +391,15 @@ rule-providers:
       - ipv4.am.i.mullvad.net
       - ipv6.am.i.mullvad.net
       - stunserver.stunprotocol.org
+
+  # # Fake-IP 真实地址兼容规则
+  # fake_ip_filter:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/refs/heads/mihomo-ruleset/fakeip-filter.mrs"
+
+  # connectivity-check:
+  #   <<: *domain
+  #   url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/connectivity-check.mrs"
 
   # 与 OpenClash 自动注册同名，统一使用同一规则集和缓存文件。
   oc-cn-domain:
